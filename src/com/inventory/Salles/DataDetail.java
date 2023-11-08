@@ -110,7 +110,6 @@ public class DataDetail extends javax.swing.JPanel {
         lb_totalTodayBenefice = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         lb_totalProduct = new javax.swing.JLabel();
@@ -188,13 +187,6 @@ public class DataDetail extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
         jLabel2.setText("Rp");
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -206,8 +198,7 @@ public class DataDetail extends javax.swing.JPanel {
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lb_totalTodayBenefice, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1))
+                        .addGap(0, 81, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -219,8 +210,7 @@ public class DataDetail extends javax.swing.JPanel {
                 .addGap(34, 34, 34)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lb_totalTodayBenefice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9)
                 .addGap(29, 29, 29))
@@ -464,45 +454,6 @@ public class DataDetail extends javax.swing.JPanel {
         p_notifikasi.hide();
     }//GEN-LAST:event_p_notifikasiMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        JFileChooser chooser = new JFileChooser();
-        chooser.setDialogTitle("Save File");
-        int i = chooser.showSaveDialog(null);
-        if (i == JFileChooser.APPROVE_OPTION) {
-            File file = chooser.getSelectedFile();
-
-            try {
-                inBaoCao(new File(file.getPath() + ".pdf"));
-          
-                Desktop desktop = Desktop.getDesktop();
-                desktop.open(new File(file.getPath() + ".pdf"));
-                desktop.print(new File(file.getPath() + ".pdf"  ));
-            } catch (DocumentException ex) {
-                Logger.getLogger(DataDetail.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ParseException ex) {
-                Logger.getLogger(DataDetail.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-            }
-//
-//            PrintService defaultPrintService = PrintServiceLookup.lookupDefaultPrintService();
-//            DocPrintJob printerJob = defaultPrintService.createPrintJob();
-//            File pdfFile = new File(file.getPath() + ".pdf");
-//            SimpleDoc simpleDoc = null;
-//
-//            try {
-//                simpleDoc = new SimpleDoc(pdfFile.toURL(), DocFlavor.URL.AUTOSENSE, null);
-//            } catch (MalformedURLException ex) {
-//                ex.printStackTrace();
-//            }
-//            try {
-//                printerJob.print(simpleDoc, null);
-//            } catch (PrintException ex) {
-//                ex.printStackTrace();
-//            }
-        }
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void btn_cariterlarisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cariterlarisActionPerformed
         terlaris();
     }//GEN-LAST:event_btn_cariterlarisActionPerformed
@@ -515,7 +466,6 @@ public class DataDetail extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_caristok;
     private javax.swing.JButton btn_cariterlaris;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -548,72 +498,7 @@ public class DataDetail extends javax.swing.JPanel {
     private javax.swing.JTextField txt_stok;
     private javax.swing.JTextField txt_terlaris;
     // End of variables declaration//GEN-END:variables
-
-    private void inBaoCao(File file) throws DocumentException, IOException, ParseException {
-        Calendar date = new GregorianCalendar();
-        ArrayList<ProductDTO> ds_ThuChiThongKe = new ArrayList<ProductDTO>();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-//        ds_ThuChiThongKe = qlThuChi.thongKeThuChi(getCureentTime() ,getCureentTime() );
-        Document document = new Document(PageSize.A4);
-        BaseFont bf1 = BaseFont.createFont("vuArial.ttf", BaseFont.IDENTITY_H, true);
-        FileOutputStream outFile = new FileOutputStream(file);
-        PdfWriter.getInstance(document, outFile);
-        document.open();
-        com.itextpdf.text.Font fontTenBaoCao = new com.itextpdf.text.Font(bf1, 18, com.itextpdf.text.Font.BOLD, BaseColor.BLUE);
-        com.itextpdf.text.Font fontTenCuaHang = new com.itextpdf.text.Font(bf1, 14, com.itextpdf.text.Font.BOLD, BaseColor.RED);
-        com.itextpdf.text.Font fontChung = new com.itextpdf.text.Font(bf1, 13, com.itextpdf.text.Font.NORMAL, BaseColor.BLACK);
-        com.itextpdf.text.Font fontChungDam = new com.itextpdf.text.Font(bf1, 13, com.itextpdf.text.Font.BOLD, BaseColor.BLACK);
-        com.itextpdf.text.Font fontChungNghieng = new com.itextpdf.text.Font(bf1, 13, com.itextpdf.text.Font.ITALIC, BaseColor.BLACK);
-        document.add(new Paragraph("DEIDINE SYSTEM", fontTenCuaHang));
-        document.add(new Paragraph(" "));
-        document.add(new Paragraph("BIEN VENU                  Email: mediaone@gmail.com       Website : mediaone.com.vn                                                SĐT: (04)8888.8888", fontChung));
-        document.add(new Paragraph("------------------------------------------------------------------------------------------------------------------------", fontChungDam));
-        Paragraph ph1 = new Paragraph("MERCI", fontTenBaoCao);
-        ph1.setSpacingAfter(10f);
-        ph1.setAlignment(Element.ALIGN_CENTER);
-        document.add(ph1);
-//        File image = new File("C:\\Users\\Republic Of Computer\\Desktop\\javafx\\shop\\resources\\add.png"); 
-//        FileInputStream imageData      = new FileInputStream(image); 
-//  document.add((Element) image);
-        document.add(new Paragraph("DATE DEBU " + getCureentTime() + " DATE FIN: " + getCureentTime(), fontChungNghieng));
-        document.add(new Paragraph(" "));
-        document.add(getTable());
-        document.add(new Paragraph(" "));
-        List unorderedList = new List(List.UNORDERED);
-        unorderedList.add(new ListItem("BONSOIR: " + " VNĐ"));
-        unorderedList.add(new ListItem("BONJOUR: " + " VNĐ"));
-        unorderedList.add(new ListItem("BONNUIT: " + " VNĐ"));
-        document.add(unorderedList);
-        document.add(new Paragraph(" "));
-        document.add(new Paragraph("          (MERCI POUR SA)", fontChungNghieng));
-        document.close();
-
-    }
-
-    private PdfPTable getTable() throws DocumentException, IOException {
-        DefaultTableModel listSalles = (DefaultTableModel) tb_favorit.getModel();
-
-        BaseFont bf1 = BaseFont.createFont("vuArial.ttf", BaseFont.IDENTITY_H, true);
-        com.itextpdf.text.Font fontChung = new com.itextpdf.text.Font(bf1, 14, com.itextpdf.text.Font.NORMAL, BaseColor.BLACK);
-        PdfPTable table = new PdfPTable(4);
-        table.setWidthPercentage(100);
-        table.setWidths(new float[]{20f, 50f, 50f, 50f});
-        table.addCell(new PdfPCell(new Paragraph("NUMERO", fontChung)));
-        table.addCell(new PdfPCell(new Paragraph("CODE PRODUIT", fontChung)));
-        table.addCell(new PdfPCell(new Paragraph("NOM PRODUIT", fontChung)));
-        table.addCell(new PdfPCell(new Paragraph("PRIX DE VENTE", fontChung)));
-        for (int i = 0; i < listSalles.getRowCount(); i++) {
-
-            table.addCell(new PdfPCell(new Paragraph(i + 1 + "")));
-            table.addCell(new PdfPCell(new Paragraph(listSalles.getValueAt(i, 0).toString(), fontChung)));
-            table.addCell(new PdfPCell(new Paragraph(listSalles.getValueAt(i, 1).toString(), fontChung)));
-            table.addCell(new PdfPCell(new Paragraph(listSalles.getValueAt(i, 2).toString())));
-//            table.addCell(new PdfPCell(new Paragraph(listSalles.getValueAt(i, 4).toString())));
-        }
-        return table;
-    }
-
-    private void totalProduk() {
+ private void totalProduk() {
         try {
             String Produk = "SELECT COUNT(*) AS nmbrPrd \n"
                     + "FROM products \n"
@@ -652,9 +537,9 @@ public class DataDetail extends javax.swing.JPanel {
         String stok = txt_stok.getText();
 
         DefaultTableModel LaporanStok = new DefaultTableModel();
-        LaporanStok.addColumn("Kode Produk");
-        LaporanStok.addColumn("Nama Produk");
-        LaporanStok.addColumn("Stok Produk");
+        LaporanStok.addColumn("code Prod");
+        LaporanStok.addColumn("NomProd");
+        LaporanStok.addColumn("quent");
 
         try {
             String cari = "CALL Product_less_then('" + stok + "');";
@@ -687,9 +572,9 @@ public class DataDetail extends javax.swing.JPanel {
         String favorit = txt_terlaris.getText();
 
         DefaultTableModel LaporanLaris = new DefaultTableModel();
-        LaporanLaris.addColumn("Kode Produk");
-        LaporanLaris.addColumn("Nama Produk");
-        LaporanLaris.addColumn("harga_jual");
+        LaporanLaris.addColumn("code Prod");
+        LaporanLaris.addColumn("nomProd");
+        LaporanLaris.addColumn("PrxVnt");
 
         try {
             String cari = "CALL TopProduct('" + favorit + "');";
@@ -724,9 +609,9 @@ public class DataDetail extends javax.swing.JPanel {
             resultSet = statement.executeQuery(tampilBarang);
 
             DefaultTableModel laporan = new DefaultTableModel();
-            laporan.addColumn("Kode Transaksi");
-            laporan.addColumn("Total Harga");
-            laporan.addColumn("Kasir");
+            laporan.addColumn("id");
+            laporan.addColumn("total");
+            laporan.addColumn("vendeur");
 
             laporan.getDataVector().removeAllElements();
             laporan.fireTableDataChanged();
