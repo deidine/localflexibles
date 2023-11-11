@@ -1,5 +1,5 @@
 package com.inventory.Salles;
- 
+
 import com.inventory.Combo.ComboItem;
 import com.inventory.Combo.ComboListener;
 import java.text.DateFormat;
@@ -27,7 +27,7 @@ import java.io.IOException;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
- 
+
 import com.inventory.raport.PdfSalle;
 import java.awt.Color;
 import java.awt.Desktop;
@@ -35,6 +35,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.print.Pageable;
 import java.awt.print.PrinterJob;
+import java.net.URISyntaxException;
 import java.nio.file.FileSystem;
 import java.nio.file.Path;
 import java.util.Locale;
@@ -44,7 +45,7 @@ import java.util.Locale;
  * @author deidine
  */
 public final class SallePage extends javax.swing.JFrame {
- 
+
     String username;
     DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
     boolean valideQuentite = false;
@@ -66,21 +67,11 @@ public final class SallePage extends javax.swing.JFrame {
         initComponents();
         this.username = username;
         loadSearchDataProduct("");
-        System.out.println("eheh"+this.username);
+        System.out.println("eheh" + this.username);
 
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        // Rectangle
-        // r=GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
-        // setSize(new java.awt.Dimensionss(r.width, r.height));
 
-        // setExtendedState(JFrame.MAXIMIZED_BOTH); // this for full screen
-        // setAlwaysOnTop(true);
-        // setUndecorated(true);
         setIconImage(new ImageIcon("resources/logo.png").getImage());
-//        operationType.setModel(
-//                new javax.swing.DefaultComboBoxModel(items));
-//
-//        operationType.addActionListener(new ComboListener(operationType));
         isKnowedCLient();
         isUNKnowedCLient();
 
@@ -450,6 +441,7 @@ public final class SallePage extends javax.swing.JFrame {
         btnSalle2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/exit.png"))); // NOI18N
         btnSalle2.setText("fermer caisse");
         btnSalle2.setBorderPainted(false);
+        btnSalle2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSalle2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalle2ActionPerformed(evt);
@@ -462,6 +454,7 @@ public final class SallePage extends javax.swing.JFrame {
         btndeleteAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/recycle-bin.png"))); // NOI18N
         btndeleteAll.setText("effacer tous");
         btndeleteAll.setBorderPainted(false);
+        btndeleteAll.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btndeleteAll.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btndeleteAllActionPerformed(evt);
@@ -474,6 +467,7 @@ public final class SallePage extends javax.swing.JFrame {
         btnSalle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/ok.png"))); // NOI18N
         btnSalle.setText("Terminer");
         btnSalle.setBorderPainted(false);
+        btnSalle.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSalle.setEnabled(false);
         btnSalle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -487,6 +481,7 @@ public final class SallePage extends javax.swing.JFrame {
         btnModifier.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/update-arrow.png"))); // NOI18N
         btnModifier.setText("Modifiee");
         btnModifier.setBorderPainted(false);
+        btnModifier.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnModifier.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnModifierActionPerformed(evt);
@@ -499,6 +494,7 @@ public final class SallePage extends javax.swing.JFrame {
         btnDeleteItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/removeproduct.png"))); // NOI18N
         btnDeleteItem.setText("Suprmer un ligne");
         btnDeleteItem.setBorderPainted(false);
+        btnDeleteItem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnDeleteItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteItemActionPerformed(evt);
@@ -532,6 +528,7 @@ public final class SallePage extends javax.swing.JFrame {
         btnCaisse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/save.png"))); // NOI18N
         btnCaisse.setText("afficher plus information");
         btnCaisse.setBorderPainted(false);
+        btnCaisse.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCaisse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCaisseActionPerformed(evt);
@@ -781,7 +778,7 @@ public final class SallePage extends javax.swing.JFrame {
         jDateChooser1.setDate(dates);
         //jDateChooser1.setDate(getCureentTime());
 
-        addCustButton.setBackground(new java.awt.Color(153, 0, 153));
+        addCustButton.setBackground(new java.awt.Color(204, 153, 0));
         addCustButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         addCustButton.setForeground(new java.awt.Color(255, 255, 255));
         addCustButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/user.png"))); // NOI18N
@@ -793,7 +790,7 @@ public final class SallePage extends javax.swing.JFrame {
             }
         });
 
-        btnEntrer.setBackground(new java.awt.Color(204, 153, 0));
+        btnEntrer.setBackground(new java.awt.Color(51, 255, 51));
         btnEntrer.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnEntrer.setForeground(new java.awt.Color(255, 255, 255));
         btnEntrer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/list.png"))); // NOI18N
@@ -838,9 +835,9 @@ public final class SallePage extends javax.swing.JFrame {
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(addCustButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnEntrer, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addComponent(btnEntrer, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
                 .addComponent(clearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -1094,8 +1091,6 @@ public final class SallePage extends javax.swing.JFrame {
         Double totalRecu = Double.valueOf(txtRecu.getText());
         if (totalRecu >= totalPaye) {
             txtRendre.setText("" + (totalRecu - totalPaye) + "");
-//            int revenu = Integer.parseInt(txtRendre.getText());
-//            txtRendre.setText("" + (revenu) + "");
 
         } else {
             txtRendre.setText("0");
@@ -1166,7 +1161,13 @@ public final class SallePage extends javax.swing.JFrame {
 
                     if (!txtRecu.getText().equals("") && !txtRecu.getText().equals("0") && recu >= total) {
                         moneyToCaisse = moneyToCaisse + Double.valueOf(txtTotal.getText());
-                        selleOrloanProduct(false);
+                        try {
+                            selleOrloanProduct(false);
+                        } catch (URISyntaxException ex) {
+                            Logger.getLogger(SallePage.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(SallePage.class.getName()).log(Level.SEVERE, null, ex);
+                        }
 
                     } else {
                         JOptionPane.showMessageDialog(this,
@@ -1187,7 +1188,13 @@ public final class SallePage extends javax.swing.JFrame {
                 case "A Terme": {
                     if ((txtRecu.getText().equals("0") || recu < total) && canLoan()) {
 
-                        selleOrloanProduct(true);
+                        try {
+                            selleOrloanProduct(true);
+                        } catch (URISyntaxException ex) {
+                            Logger.getLogger(SallePage.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(SallePage.class.getName()).log(Level.SEVERE, null, ex);
+                        }
 
                     } else {
                         JOptionPane.showMessageDialog(this,
@@ -1207,9 +1214,13 @@ public final class SallePage extends javax.swing.JFrame {
                     if (total > 0) {
                         DefaultTableModel listSalles = (DefaultTableModel) salesTable.getModel();
 
-//                      if (!txtRecu.getText().equals("") && !txtRecu.getText().equals("0") && recu >= total) {
-//                        moneyToCaisse = moneyToCaisse + Double.valueOf(txtTotal.getText());
-                        devisProduct(true);
+                        try {
+                            devisProduct(true);
+                        } catch (URISyntaxException ex) {
+                            Logger.getLogger(SallePage.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(SallePage.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                         listSalles.setRowCount(0);
                         clear3();
                     } else {
@@ -1244,8 +1255,7 @@ public final class SallePage extends javax.swing.JFrame {
         putMoneyInCaisse();
         moneyToCaisse = 0.0;
         System.out.println(moneyToCaisse + " moneyToCaisse");
-//        dispose();
-//        System.exit(0);
+
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSalle2ActionPerformed
 
@@ -1276,8 +1286,7 @@ public final class SallePage extends javax.swing.JFrame {
             }
 
         }
-        //        isKnowedCLient();
-        //        isUNKnowedCLient();
+
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEntrerActionPerformed
 
@@ -1366,8 +1375,6 @@ public final class SallePage extends javax.swing.JFrame {
 
     private void txtProductKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProductKeyReleased
 
-        // quantityText.setText("1");
-        // jDateChooser1.setDate(dates);
         String text = txtProduct.getText();
         loadSearchDataProduct(text);
 // TODO add your handling code here:
@@ -1506,7 +1513,7 @@ public final class SallePage extends javax.swing.JFrame {
             custCodeText.getText(), prodCodeText.getText(), priceText.getText(),
             quantityText.getText(), prodNameText.getText()
         };
-        // data.add(rows);
+
         String[] columns = {"nom", "prenom", "nomProd", "quentite"};
 
         listSalles.addRow(rows);
@@ -1528,7 +1535,6 @@ public final class SallePage extends javax.swing.JFrame {
             custCodeText.setText("");
             // btnLouee.setEnabled(true);
             clientUnKnow.setSelected(false);
-            // clientUnKnow.setEnabled(false);
             TVA.setEnabled(true);
 
             operationType.setModel(
@@ -1541,7 +1547,6 @@ public final class SallePage extends javax.swing.JFrame {
 
             txtClient.setEnabled(false);
             custCodeText.setText("inconue");
-            // btnLouee.setEnabled(false);
             clientUnKnow.setEnabled(true);
             clientUnKnow.setSelected(true);
             DefaultTableModel listClients = (DefaultTableModel) jTableClient.getModel();
@@ -1567,22 +1572,17 @@ public final class SallePage extends javax.swing.JFrame {
             listClients.setRowCount(0);
             txtClient.setEnabled(false);
             custCodeText.setText("inconue");
-            // btnLouee.setEnabled(false);
-            // operationType.setSelectedIndex(1);
-
             operationType.setModel(
                     new javax.swing.DefaultComboBoxModel(items2));
 
             operationType.addActionListener(new ComboListener(operationType));
             clientKnow.setSelected(false);
-            // clientKnow.setEnabled(false);
         } else {
             TVA.setEnabled(true);
 
             txtClient.setEnabled(true);
 
             custCodeText.setText("");
-            // btnLouee.setEnabled(true);
             clientKnow.setEnabled(true);
             clientKnow.setSelected(true);
 
@@ -1622,7 +1622,7 @@ public final class SallePage extends javax.swing.JFrame {
 //        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date dates = new Date();
-//         System.out.println(dateFormat.format(jDateChooser1.getDate()));
+
 //System.out.println( dateFormat.format(dates));
         return dateFormat.format(dates);
 
@@ -1662,27 +1662,9 @@ public final class SallePage extends javax.swing.JFrame {
 //cette fonction afficher ou calcler le motent qui doit payer en ajoutent tout les line du tableau du vende quentite*prix de vete
 
     void totalValue() {
-        DefaultTableModel listSalles = (DefaultTableModel) salesTable.getModel();
-        Double totalPaye = 0.0;
-        for (int i = 0; i < listSalles.getRowCount(); i++) {
-            Double sellPrice = Double.valueOf(listSalles.getValueAt(i, 2).toString());
-            Double totalRevenue = sellPrice;
 
-//            Double totalRevenue = sellPrice * Integer.valueOf(listSalles.getValueAt(i, 3).toString());
-            totalPaye = totalPaye + totalRevenue;
+        Utils.totalValue((DefaultTableModel) salesTable.getModel(), TVA, txtTotal, salesTable);
 
-        }
-
-        if (TVA.isSelected()) {
-            totalPaye = (totalPaye * 1.6);
-            txtTotal.setText(totalPaye.toString());
-        } else {
-            txtTotal.setText(totalPaye.toString());
-        }
-//        si le table est vide metre le champ 0
-        if (salesTable.getRowCount() == 0) {
-            txtTotal.setText("0");
-        }
     }
 //cette fonction regarder si le table contient le nom inconue est retourner si exite ou non 
 
@@ -1753,12 +1735,7 @@ public final class SallePage extends javax.swing.JFrame {
 //it the table so you have to dleete it evry time you insert duplicate rows 
                     listSalles.removeRow(listSalles.getRowCount() + 1);
 //
-//                    if (i == 0) {
-//                        listSalles.removeRow(listSalles.getRowCount()+1);
-//                        System.out.println("yiiy"+listSalles.getRowCount()+1);
-//                    } else {
-//                        listSalles.removeRow(i+1 );
-//                    }
+
                 }
 
             }
@@ -1803,10 +1780,8 @@ public final class SallePage extends javax.swing.JFrame {
                 quent1 = Integer.parseInt(listSalles.getValueAt(i, 3).toString());
 
                 if (codeProd2.equals(codeProd1)) {
-//                 quent1 = ;
                     listSalles.setValueAt(quent1 - quent2, i, 3);
 
-//                    listSalles.removeRow(listSalles.getRowCount());
                 }
             }
         }
@@ -1867,10 +1842,9 @@ public final class SallePage extends javax.swing.JFrame {
             quent1 = Integer.parseInt(listSalles.getValueAt(i, 3).toString());
 
             if (codeProd2.equals(codeProd1)) {
-//                 quent1 = ;
+
                 listSalles.setValueAt(quent1 + quent2, i, 3);
 
-//                    listSalles.removeRow(listSalles.getRowCount());
             }
         }
     }
@@ -1878,37 +1852,37 @@ public final class SallePage extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(SallePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(SallePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(SallePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(SallePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new SallePage("deodone").setVisible(true);
-//            }
-//        });
-//    }
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(SallePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(SallePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(SallePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(SallePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new SallePage("deodone").setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox TVA;
@@ -1996,7 +1970,7 @@ public final class SallePage extends javax.swing.JFrame {
         }
     }
 
-    public void selleOrloanProduct(boolean isLoan) {
+    public void selleOrloanProduct(boolean isLoan) throws URISyntaxException, InterruptedException {
         DefaultTableModel listSalles = (DefaultTableModel) salesTable.getModel();
         boolean tva = false;
         if (TVA.isSelected()) {
@@ -2026,8 +2000,6 @@ public final class SallePage extends javax.swing.JFrame {
                 productDTO2.setQuantity(Integer.parseInt(listSalles.getValueAt(i, 3).toString()));
                 new ProductDAO().sellDetailProductDAO(productDTO2, id);
             }
-//new ProductDAO().report(id);
-            JOptionPane.showMessageDialog(null, "le vende est terminer  pour le client." + productDTO.getCustCode() + " par le vendeur " + username + " bonjournee");
             saveFile();
             listSalles.setRowCount(0);
             clear3();
@@ -2041,7 +2013,7 @@ public final class SallePage extends javax.swing.JFrame {
 
     }
 
-    public void devisProduct(boolean isLoan) {
+    public void devisProduct(boolean isLoan) throws URISyntaxException, InterruptedException {
         DefaultTableModel listSalles = (DefaultTableModel) salesTable.getModel();
         if (listSalles.getRowCount() != 0) {
             ProductDTO productDTO = new ProductDTO();
@@ -2068,8 +2040,8 @@ public final class SallePage extends javax.swing.JFrame {
                 productDTO2.setQuantity(Integer.parseInt(listSalles.getValueAt(i, 3).toString()));
                 new ProductDAO().sellDevisDetailProductDAO(productDTO2, id);
             }
-//new ProductDAO().report(id);
-            JOptionPane.showMessageDialog(null, "le vende est terminer  pour le client." + productDTO.getCustCode() + " par le vendeur " + username + " bonjournee");
+            new ProductDAO().report(id);
+//            JOptionPane.showMessageDialog(null, "le vende est terminer  pour le client." + productDTO.getCustCode() + " par le vendeur " + username + " bonjournee");
             saveFile();
             listSalles.setRowCount(0);
             clear3();
@@ -2083,36 +2055,23 @@ public final class SallePage extends javax.swing.JFrame {
 
     }
 
-    public void saveFile() {
-//        JFileChooser chooser = new JFileChooser();
-//        chooser.setDialogTitle("Save File");
-//        int i = chooser.showSaveDialog(null);
-//        if (i == JFileChooser.APPROVE_OPTION) {
-//            File file = chooser.getSelectedFile();
+    public void saveFile() throws URISyntaxException, InterruptedException {
 
         try {
             PdfSalle.inBaoCao(new File("deidine.pdf"), getCureentTime(), operationType.getSelectedItem().toString(), (DefaultTableModel) salesTable.getModel(),
                     getCustomerInfo(custCodeText.getText()), txtRecu.getText(), txtRendre.getText(), txtTotal.getText());
 
-//            desktop.open(new File("deidine.pdf"));
-//            try {
-//                Desktop desktop = Desktop.getDesktop();
-//                desktop.print(new File("vim.txt"));
-//            } catch (IOException i) {
-//
-//            }
-//            System.out.println("hi");
-//System.out.println("deweidine");
-//            System.exit(0);
-            new ViewerCtrl("deidine.pdf");
-//                desktop.print(new File(file.getPath() + ".pdf"));
+            int a = JOptionPane.showConfirmDialog(null, "tu veux imprimer le facture?", "Select", JOptionPane.YES_NO_OPTION);
+            JOptionPane.setRootFrame(null);
+            if (a == JOptionPane.YES_OPTION) {
+                Utils.printFromWindowsPrinter();
+            }
         } catch (DocumentException ex) {
             Logger.getLogger(DataDetail.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
             Logger.getLogger(DataDetail.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
         }
-//        }
     }
 
     public String getCustomerInfo(String code) {
@@ -2131,17 +2090,4 @@ public final class SallePage extends javax.swing.JFrame {
         return null;
     }
 
-    public void print(Document doc) {
-        try {
-            PrinterJob pj = PrinterJob.getPrinterJob();
-//			pj.defaultPage(mPageable.getPageFormat(0));
-            pj.setPageable((Pageable) doc);
-            if (pj.printDialog()) {
-                pj.print();
-            }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex.toString(),
-                    "Error in Printing", 1);
-        }
-    }
 }

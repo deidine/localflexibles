@@ -14,6 +14,7 @@ import java.awt.Desktop;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -484,7 +485,13 @@ public class PayDevis extends javax.swing.JDialog {
 
                     if (!txtRecu.getText().equals("") && !txtRecu.getText().equals("0") && recu >= total) {
                         moneyToCaisse = moneyToCaisse + Double.valueOf(txtTotal.getText());
-                        selleOrloanProduct(false);
+                        try {
+                            selleOrloanProduct(false);
+                        } catch (URISyntaxException ex) {
+                            Logger.getLogger(PayDevis.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(PayDevis.class.getName()).log(Level.SEVERE, null, ex);
+                        }
 
                     } else {
                         JOptionPane.showMessageDialog(this,
@@ -505,7 +512,13 @@ public class PayDevis extends javax.swing.JDialog {
                 case "A Terme": {
                     if ((txtRecu.getText().equals("0") || recu < total)) {
 
-                        selleOrloanProduct(true);
+                        try {
+                            selleOrloanProduct(true);
+                        } catch (URISyntaxException ex) {
+                            Logger.getLogger(PayDevis.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(PayDevis.class.getName()).log(Level.SEVERE, null, ex);
+                        }
 
                     } else {
                         JOptionPane.showMessageDialog(this,
@@ -566,7 +579,7 @@ public class PayDevis extends javax.swing.JDialog {
     }//GEN-LAST:event_TVAActionPerformed
 
     private void btnPay1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPay1ActionPerformed
-delteDevis(); // TODO add your handling code here:
+        delteDevis(); // TODO add your handling code here:
     }//GEN-LAST:event_btnPay1ActionPerformed
 
     private void btnEntrer1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEntrer1MouseEntered
@@ -762,8 +775,8 @@ delteDevis(); // TODO add your handling code here:
                 Logger.getLogger(PayLoan.class.getName()).log(Level.SEVERE, null, ex);
             }
             totalValue();
-        DefaultTableModel listSalles = (DefaultTableModel) devisTable.getModel();
-listSalles.setRowCount(0);
+            DefaultTableModel listSalles = (DefaultTableModel) devisTable.getModel();
+            listSalles.setRowCount(0);
         } else {
             JOptionPane.showMessageDialog(this, "Le Table est null.");
 
@@ -780,27 +793,9 @@ listSalles.setRowCount(0);
     }
 
     void totalValue() {
-        DefaultTableModel listSalles = (DefaultTableModel) devisTable.getModel();
-        Double totalPaye = 0.0;
-        for (int i = 0; i < listSalles.getRowCount(); i++) {
-            Double sellPrice = Double.valueOf(listSalles.getValueAt(i, 2).toString());
-            Double totalRevenue = sellPrice;
-            totalPaye = totalPaye + totalRevenue;
-            txtTotal.setText(totalPaye.toString());
 
-        }
+        Utils.totalValue((DefaultTableModel) devisTable.getModel(), TVA, txtTotal, devisTable);
 
-        if (TVA.isSelected()) {
-            totalPaye = (totalPaye * 1.6);
-            txtTotal.setText(totalPaye.toString());
-        } else {
-            txtTotal.setText(totalPaye.toString());
-        }
-
-//        si le table est vide metre le champ 0
-        if (devisTable.getRowCount() == 0) {
-            txtTotal.setText("0");
-        }
     }
 
     public void loadDataSet() {
@@ -823,7 +818,7 @@ listSalles.setRowCount(0);
         }
     }
 
-    public void selleOrloanProduct(boolean isLoan) {
+    public void selleOrloanProduct(boolean isLoan) throws URISyntaxException, InterruptedException {
         DefaultTableModel listSalles = (DefaultTableModel) devisTable.getModel();
 
         boolean tva = false;
@@ -854,7 +849,7 @@ listSalles.setRowCount(0);
                 new ProductDAO().sellDetailProductDAO(productDTO2, id);
             }
 //new ProductDAO().report(id);
-            JOptionPane.showMessageDialog(null, "le vende est terminer  pour le client." + productDTO.getCustCode() + " par le vendeur " + username + " bonjournee");
+//            JOptionPane.showMessageDialog(null, "le vende est terminer  pour le client." + productDTO.getCustCode() + " par le vendeur " + username + " bonjournee");
             saveFile();
             delteDevis();
             listSalles.setRowCount(0);
@@ -867,7 +862,7 @@ listSalles.setRowCount(0);
 
     }
 
-    public void saveFile() {
+    public void saveFile() throws URISyntaxException, InterruptedException {
 //        JFileChooser chooser = new JFileChooser();
 //        chooser.setDialogTitle("Save File");
 //        int i = chooser.showSaveDialog(null);
@@ -879,8 +874,16 @@ listSalles.setRowCount(0);
                     getCustomerInfo(codeText.getText()), txtRecu.getText(), txtRendre.getText(), txtTotal.getText());
 
             Desktop desktop = Desktop.getDesktop();
-            desktop.open(new File("deidine.pdf"));
-            desktop.print(new File("deidine.pdf"));
+//            desktop.open(new File("deidine.pdf"));
+//            desktop.print(new File("deidine.pdf"));
+            int a = JOptionPane.showConfirmDialog(null, "tu veux imprimer le facture?", "Select", JOptionPane.YES_NO_OPTION);
+            JOptionPane.setRootFrame(null);
+            if (a == JOptionPane.YES_OPTION) {
+
+                Utils.printFromWindowsPrinter();
+
+//                    System.exit(0);
+            }
 //                desktop.print(new File(file.getPath() + ".pdf"));
         } catch (DocumentException ex) {
             Logger.getLogger(DataDetail.class.getName()).log(Level.SEVERE, null, ex);

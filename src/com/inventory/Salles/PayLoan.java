@@ -815,6 +815,7 @@ void push1DataPay() {
     void totalValue() {
         DefaultTableModel listSalles = (DefaultTableModel) payTable.getModel();
         Double totalPaye = 0.0;
+       
         for (int i = 0; i < listSalles.getRowCount(); i++) {
             Double sellPrice = Double.parseDouble(listSalles.getValueAt(i, 4).toString());
             Double totalRevenue = sellPrice;

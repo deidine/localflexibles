@@ -65,10 +65,14 @@ public class MenuItem extends javax.swing.JPanel {
             }
         });
 
+        lb_icon.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
         lb_menuName.setBackground(new java.awt.Color(210, 218, 255));
         lb_menuName.setText("Menu Item");
+        lb_menuName.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         lb_iconSub.setBackground(new java.awt.Color(102, 102, 0));
+        lb_iconSub.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

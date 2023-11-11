@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.inventory.Salles;
 
 import java.awt.AWTException;
@@ -11,8 +7,16 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.file.Paths;
 import java.security.CodeSource;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
+import com.inventory.UI.ProgressBar;
+import javax.swing.JCheckBox;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,9 +25,10 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Utils {
 
-    public static void main(String arg[]) throws AWTException {
-
-        Backupdbtosql();
+    public static void main(String arg[]) throws AWTException, URISyntaxException, IOException, InterruptedException {
+//Restoredbfromsql("22 11 643 09-11-2023backup.sql");
+//        printFromWindowsPrinter();
+        //       Backupdbtosql();
     }
 
     public static void Restoredbfromsql(String s) {
@@ -36,20 +41,20 @@ public class Utils {
             String jarDir = jarFile.getParentFile().getPath();
 
             /*NOTE: Creating Database Constraints*/
-            String dbName = "inventory2";
+            String dbName = "deidine";
             String dbUser = "root";
-            String dbPass = "";
+            String dbPass = null;
             System.out.println("deidine");
             /*NOTE: Creating Path Constraints for restoring*/
             String restorePath = jarDir + "\\backup" + "\\" + s;
 
             /*NOTE: Used to create a cmd command*/
  /*NOTE: Do not create a single large string, this will cause buffer locking, use string array*/
-            String[] executeCmd = new String[]{"mysql", dbName, "-u" + dbUser, "-p" + dbPass, "-e", " source " + restorePath};
-
+            String[] executeCmd = new String[]{"C:\\xampp\\mysql\\bin\\mysql.exe", dbName, "-u" + dbUser, "-p" + dbPass, "-e", " source " + restorePath};
             /*NOTE: processComplete=0 if correctly executed, will contain other values if not*/
             Process runtimeProcess = Runtime.getRuntime().exec(executeCmd);
             int processComplete = runtimeProcess.waitFor();
+            System.out.println(processComplete);
 
             /*NOTE: processComplete=0 if correctly executed, will contain other values if not*/
             if (processComplete == 0) {
@@ -75,13 +80,13 @@ public class Utils {
 
 
             /*NOTE: Creating Database Constraints*/
-            String dbName = "inventory2";
+            String dbName = "deidine";
             String dbUser = "root";
-            String dbPass = "";
+            String dbPass = null;
             System.out.println(jarDir);
             /*NOTE: Creating Path Constraints for folder saving*/
  /*NOTE: Here the backup folder is created for saving inside it*/
-            String folderPath = jarDir + "\\bahhckup";
+            String folderPath = jarDir + "\\backup";
 
             /*NOTE: Creating Folder if it does not exist*/
             File f1 = new File(folderPath);
@@ -89,18 +94,24 @@ public class Utils {
 
             /*NOTE: Creating Path Constraints for backup saving*/
  /*NOTE: Here the backup is saved in a folder called backup with the name backup.sql*/
-            String savePath = "\"" + jarDir + "\\bahhckup\\" + "backup.sql\"";
+            String savePath = "\"" + jarDir + "\\backup"
+                    + "\\" + getCureentTime() + "backup.sql\"";
 
             /*NOTE: Used to create a cmd command*/
-            String executeCmd = "C:\\xampp\\mysql\\bin\\mysqldump.exe -u " + dbUser + " -p " + dbPass + " --database " + dbName + " -r " + savePath;
+            String executeCmd = "C:\\xampp\\mysql\\bin\\mysqldump.exe -u "
+                    + dbUser + " --database " + dbName + " -r " + savePath;
 
-            Process runtimeProcess = Runtime.getRuntime().exec(executeCmd);
+            Process runtimeProcess = Runtime.getRuntime().exec(new String[]{"cmd.exe", "/c", executeCmd
+            });
             Robot r = new Robot();
             r.keyPress(KeyEvent.VK_ENTER);
             r.keyRelease(KeyEvent.VK_ENTER);
             int processComplete = runtimeProcess.waitFor();
-            System.out.println(processComplete );
-            
+            System.out.println(processComplete);
+//            final ProgressBar pbr = ProgressBar.getInstance();
+//            pbr.setVisible(true);
+//            pbr.initProgressBar(i);
+
             if (processComplete == 0) {
                 System.out.println("Backup Complete");
             } else {
@@ -112,4 +123,86 @@ public class Utils {
         }
     }
 
+    static String getCureentTime() {
+
+        DateFormat dateFormat = new SimpleDateFormat("HH MM SS dd-MM-yyyy");
+        Date dates = new Date();
+
+        return dateFormat.format(dates);
+
+    }
+
+    public static void totalValue(DefaultTableModel listSalles, JCheckBox TVA, JTextField txtTotal, JTable salesTable) {
+
+        Double totalPaye = 0.0;
+        for (int i = 0; i < listSalles.getRowCount(); i++) {
+            Double sellPrice = Double.valueOf(listSalles.getValueAt(i, 2).toString());
+            Double totalRevenue = sellPrice;
+
+//            Double totalRevenue = sellPrice * Integer.valueOf(listSalles.getValueAt(i, 3).toString());
+            totalPaye = totalPaye + totalRevenue;
+
+        }
+        if (TVA.isSelected()) {
+            totalPaye = (totalPaye * 1.6);
+            txtTotal.setText(totalPaye.toString());
+        } else {
+            txtTotal.setText(totalPaye.toString());
+        }
+
+//        si le table est vide metre le champ 0
+        if (salesTable.getRowCount() == 0) {
+            txtTotal.setText("0");
+        }
+    }
+
+    public static void totalNoTvaValue(DefaultTableModel listSalles, JTextField txtTotal, JTable salesTable) {
+
+        Double totalPaye = 0.0;
+        for (int i = 0; i < listSalles.getRowCount(); i++) {
+            Double sellPrice = Double.valueOf(listSalles.getValueAt(i, 2).toString());
+            Double totalRevenue = sellPrice;
+
+//            Double totalRevenue = sellPrice * Integer.valueOf(listSalles.getValueAt(i, 3).toString());
+            totalPaye = totalPaye + totalRevenue;
+
+        }
+        txtTotal.setText(totalPaye.toString());
+
+//        si le table est vide metre le champ 0
+        if (salesTable.getRowCount() == 0) {
+            txtTotal.setText("0");
+        }
+    }
+
+    public static void printFromWindowsPrinter() throws URISyntaxException, IOException, InterruptedException {
+        CodeSource codeSource = Utils.class.getProtectionDomain().getCodeSource();
+        File jarFile = new File(codeSource.getLocation().toURI().getPath());
+        String jarDir = jarFile.getParentFile().getPath();     
+        String jarDirTest = jarFile.getParentFile().getParentFile().getPath();
+ 
+        System.out.println(jarDir+"\\deidine.pdf");    
+        System.out.println( jarFile.getParentFile().getParentFile().getPath());
+
+        /*NOTE: processComplete=0 if correctly executed, will contain other values if not*/
+//        Process runtimeProcess = Runtime.getRuntime().exec("print.bat \""+jarDirTest+"\\deidine.pdf\"" );
+  
+//this if you want to add arg to the file that you want to run it and add the path to the pdf
+//Process runtimeProcess = Runtime.getRuntime().exec("print.bat \""+jarDir+"\\deidine.pdf\"" );
+Process runtimeProcess = Runtime.getRuntime().exec("print.bat" );
+
+
+        int processComplete = runtimeProcess.waitFor();
+        System.out.println(processComplete);
+
+        /*NOTE: processComplete=0 if correctly executed, will contain other values if not*/
+        if (processComplete == 0) {
+                    System.out.println("printed ok");
+
+//            JOptionPane.showMessageDialog(null, "Successfully printed : ");
+        } else {
+            JOptionPane.showMessageDialog(null, "Error at restoring");
+        }
+
+    }
 }
