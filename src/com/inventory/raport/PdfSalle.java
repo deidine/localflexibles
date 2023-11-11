@@ -4,6 +4,7 @@
  */
 package com.inventory.raport;
 
+import com.inventory.Salles.Utils;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -21,10 +22,12 @@ import java.awt.Color;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException; 
+import java.net.URISyntaxException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame; 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import org.icepdf.ri.common.SwingController;
@@ -36,7 +39,7 @@ import org.icepdf.ri.common.SwingViewBuilder;
  */
 public class PdfSalle {
 
-    public static void inBaoCao(File file, String date, String operationType, DefaultTableModel table, String customerInfo, String recu, String back, String total) throws DocumentException, IOException, ParseException {
+    public static void inBaoCao(File file, String date, String operationType, DefaultTableModel table, String customerInfo, String recu, String back, String total) throws DocumentException, IOException, ParseException, URISyntaxException, InterruptedException {
 
         Document document = new Document(PageSize.A4_LANDSCAPE);
         BaseFont bf1 = BaseFont.createFont("vuArial.ttf", BaseFont.IDENTITY_H, true);
@@ -93,7 +96,11 @@ public class PdfSalle {
   document.close();
   
 //    assertEquals(expectedText, text.toString());
-  
+   int a = JOptionPane.showConfirmDialog(null, "tu veux imprimer le facture?", "Select", JOptionPane.YES_NO_OPTION);
+            JOptionPane.setRootFrame(null);
+            if (a == JOptionPane.YES_OPTION) {
+                Utils.printFromWindowsPrinter();
+            }
     }
     
     public static PdfPTable getTable(DefaultTableModel listSalles, ArrayList<String> name, String total) throws DocumentException, IOException {

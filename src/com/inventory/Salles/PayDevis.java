@@ -876,14 +876,7 @@ public class PayDevis extends javax.swing.JDialog {
             Desktop desktop = Desktop.getDesktop();
 //            desktop.open(new File("deidine.pdf"));
 //            desktop.print(new File("deidine.pdf"));
-            int a = JOptionPane.showConfirmDialog(null, "tu veux imprimer le facture?", "Select", JOptionPane.YES_NO_OPTION);
-            JOptionPane.setRootFrame(null);
-            if (a == JOptionPane.YES_OPTION) {
 
-                Utils.printFromWindowsPrinter();
-
-//                    System.exit(0);
-            }
 //                desktop.print(new File(file.getPath() + ".pdf"));
         } catch (DocumentException ex) {
             Logger.getLogger(DataDetail.class.getName()).log(Level.SEVERE, null, ex);

@@ -9,6 +9,7 @@ import com.inventory.tables.TableTVA;
 import com.itextpdf.text.DocumentException;
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -304,6 +305,10 @@ String description="tva table";
         } catch (IOException ex) {
             Logger.getLogger(InformationTVA.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
+            Logger.getLogger(InformationTVA.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(InformationTVA.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InterruptedException ex) {
             Logger.getLogger(InformationTVA.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_bntPayActionPerformed

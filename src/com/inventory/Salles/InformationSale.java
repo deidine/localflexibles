@@ -10,6 +10,7 @@ import com.itextpdf.text.DocumentException;
 import java.io.File;
 import java.io.IOException;
 import java.lang.System.Logger;
+import java.net.URISyntaxException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -303,6 +304,10 @@ public class InformationSale extends javax.swing.JPanel {
         } catch (IOException ex) {
             java.util.logging.Logger.getLogger(InformationSale.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
+            java.util.logging.Logger.getLogger(InformationSale.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (URISyntaxException ex) {
+            java.util.logging.Logger.getLogger(InformationSale.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InterruptedException ex) {
             java.util.logging.Logger.getLogger(InformationSale.class.getName()).log(Level.SEVERE, null, ex);
         }
 

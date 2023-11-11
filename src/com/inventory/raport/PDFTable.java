@@ -1,5 +1,6 @@
 package com.inventory.raport;
 
+import com.inventory.Salles.Utils;
 import com.inventory.print.ViewerCtrl;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -17,6 +18,7 @@ import java.awt.Color;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
@@ -32,7 +34,7 @@ import org.icepdf.ri.common.SwingViewBuilder;
  */
 public class PDFTable {
 
-    public static void inBaoCao(String description, File file, float[] width, String date, ArrayList<String> name, DefaultTableModel table) throws DocumentException, IOException, ParseException {
+    public static void inBaoCao(String description, File file, float[] width, String date, ArrayList<String> name, DefaultTableModel table) throws DocumentException, IOException, ParseException, URISyntaxException, InterruptedException {
 
         Document document = new Document(PageSize.A4_LANDSCAPE);
         BaseFont bf1 = BaseFont.createFont("vuArial.ttf", BaseFont.IDENTITY_H, true);
@@ -68,7 +70,8 @@ public class PDFTable {
         document.add(unorderedList);
 
         document.close();
-        new ViewerCtrl("deidine.pdf");
+//        new ViewerCtrl("deidine.pdf");
+Utils.printFromWindowsPrinter();
     }
 
     public static PdfPTable getTable(DefaultTableModel listSalles, ArrayList<String> name, float[] width) throws DocumentException, IOException {

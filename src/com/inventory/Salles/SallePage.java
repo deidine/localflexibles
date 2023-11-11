@@ -1970,7 +1970,7 @@ public final class SallePage extends javax.swing.JFrame {
         }
     }
 
-    public void selleOrloanProduct(boolean isLoan) throws URISyntaxException, InterruptedException {
+    public void selleOrloanProduct(boolean isLoan) throws URISyntaxException, InterruptedException  {
         DefaultTableModel listSalles = (DefaultTableModel) salesTable.getModel();
         boolean tva = false;
         if (TVA.isSelected()) {
@@ -2013,7 +2013,7 @@ public final class SallePage extends javax.swing.JFrame {
 
     }
 
-    public void devisProduct(boolean isLoan) throws URISyntaxException, InterruptedException {
+    public void devisProduct(boolean isLoan) throws URISyntaxException, InterruptedException  {
         DefaultTableModel listSalles = (DefaultTableModel) salesTable.getModel();
         if (listSalles.getRowCount() != 0) {
             ProductDTO productDTO = new ProductDTO();
@@ -2055,17 +2055,13 @@ public final class SallePage extends javax.swing.JFrame {
 
     }
 
-    public void saveFile() throws URISyntaxException, InterruptedException {
+    public void saveFile() throws URISyntaxException, InterruptedException  {
 
         try {
             PdfSalle.inBaoCao(new File("deidine.pdf"), getCureentTime(), operationType.getSelectedItem().toString(), (DefaultTableModel) salesTable.getModel(),
                     getCustomerInfo(custCodeText.getText()), txtRecu.getText(), txtRendre.getText(), txtTotal.getText());
 
-            int a = JOptionPane.showConfirmDialog(null, "tu veux imprimer le facture?", "Select", JOptionPane.YES_NO_OPTION);
-            JOptionPane.setRootFrame(null);
-            if (a == JOptionPane.YES_OPTION) {
-                Utils.printFromWindowsPrinter();
-            }
+           
         } catch (DocumentException ex) {
             Logger.getLogger(DataDetail.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {

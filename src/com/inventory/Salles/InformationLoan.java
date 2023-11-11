@@ -20,6 +20,7 @@ import java.util.Locale;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import com.inventory.Salles.PayLoan;
+import java.net.URISyntaxException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -338,6 +339,10 @@ public class InformationLoan extends javax.swing.JPanel {
         } catch (IOException ex) {
             java.util.logging.Logger.getLogger(InformationLoan.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
+            java.util.logging.Logger.getLogger(InformationLoan.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (URISyntaxException ex) {
+            java.util.logging.Logger.getLogger(InformationLoan.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InterruptedException ex) {
             java.util.logging.Logger.getLogger(InformationLoan.class.getName()).log(Level.SEVERE, null, ex);
         }
          

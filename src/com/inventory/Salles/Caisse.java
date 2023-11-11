@@ -9,6 +9,7 @@ import com.inventory.tables.CaisseTable;
 import com.itextpdf.text.DocumentException;
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -277,6 +278,10 @@ public class Caisse extends javax.swing.JPanel {
         } catch (IOException ex) {
             Logger.getLogger(Caisse.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
+            Logger.getLogger(Caisse.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(Caisse.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InterruptedException ex) {
             Logger.getLogger(Caisse.class.getName()).log(Level.SEVERE, null, ex);
         }
        
