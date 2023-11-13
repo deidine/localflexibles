@@ -10,3 +10,4 @@ and when it print shuld shot dialog apear in the util.java uncomment it
 
 + il vaux cacher le mot de pass pour ne pas etre public a les autre
 + 
+يالتك الين حد يدخل login pardefaut
