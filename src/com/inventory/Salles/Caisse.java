@@ -267,7 +267,6 @@ public class Caisse extends javax.swing.JPanel {
        
         name.add("vend_par");
       
-
         String description = "Les Caisse table";
 
         try {

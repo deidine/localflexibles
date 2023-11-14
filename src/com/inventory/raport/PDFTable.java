@@ -36,27 +36,42 @@ public class PDFTable {
 
     public static void inBaoCao(String description, File file, float[] width, String date, ArrayList<String> name, DefaultTableModel table) throws DocumentException, IOException, ParseException, URISyntaxException, InterruptedException {
 
+        PdfSalle pdf = new PdfSalle();
+
         Document document = new Document(PageSize.A4_LANDSCAPE);
         BaseFont bf1 = BaseFont.createFont("vuArial.ttf", BaseFont.IDENTITY_H, true);
         FileOutputStream outFile = new FileOutputStream(file);
         PdfWriter.getInstance(document, outFile);
 
         document.open();
-        com.itextpdf.text.Font fontTenCuaHang = new com.itextpdf.text.Font(bf1, 14, com.itextpdf.text.Font.BOLD, BaseColor.RED);
         com.itextpdf.text.Font fontTenBaoCao = new com.itextpdf.text.Font(bf1, 18, com.itextpdf.text.Font.BOLD, BaseColor.BLUE);
+        com.itextpdf.text.Font fontTenCuaHang = new com.itextpdf.text.Font(bf1, 14, com.itextpdf.text.Font.BOLD, BaseColor.RED);
+        com.itextpdf.text.Font fontChung = new com.itextpdf.text.Font(bf1, 13, com.itextpdf.text.Font.NORMAL, BaseColor.BLACK);
+        com.itextpdf.text.Font fontChungDam = new com.itextpdf.text.Font(bf1, 13, com.itextpdf.text.Font.BOLD, BaseColor.BLACK);
+        com.itextpdf.text.Font fontChungNghieng = new com.itextpdf.text.Font(bf1, 13, com.itextpdf.text.Font.BOLD, BaseColor.BLACK);
+        Image logo;
 
-        Paragraph companyName = new Paragraph("DEIDINE SYSTEM", fontTenCuaHang);
+        logo = Image.getInstance(new ImageIcon(pdf.imgType()).getImage().getScaledInstance(90, 30, java.awt.Image.SCALE_REPLICATE), Color.white);
+        logo.setAlignment(Element.ALIGN_CENTER);
+
+        document.add(logo);
+        Paragraph companyName = new Paragraph(pdf.readTxtFile(0), fontTenCuaHang);
         companyName.setAlignment(Element.ALIGN_CENTER);
 
         document.add(companyName);
-        document.add(new Paragraph(" "));
-        Image logo;
-        logo = Image.getInstance(new ImageIcon("resources/login.png").getImage().getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH), Color.yellow);
-        logo.setAlignment(Element.ALIGN_CENTER);
-        Paragraph ph1 = new Paragraph(description, fontTenBaoCao);
 
-        document.add(logo);
-        document.add(new Paragraph("  "));
+        Paragraph dat = new Paragraph("DATE : " + date, fontChungNghieng);
+        dat.setAlignment(Element.ALIGN_RIGHT);
+        document.add(dat);
+        document.add(new Paragraph(pdf.readTxtFile(1)
+                + "\n" + pdf.readTxtFile(3)
+                + "\n" + pdf.readTxtFile(2),
+                fontChung));
+        document.add(new Paragraph("------------------------------------------------------------------------------------------------------------------------", fontChungDam));
+
+        Paragraph ph1 = new Paragraph(description, fontTenBaoCao);
+        ph1.setSpacingAfter(10f);
+        ph1.setAlignment(Element.ALIGN_CENTER);
         document.add(ph1);
 
         document.add(new Paragraph(" "));
@@ -71,7 +86,7 @@ public class PDFTable {
 
         document.close();
 //        new ViewerCtrl("deidine.pdf");
-Utils.printFromWindowsPrinter();
+        Utils.printFromWindowsPrinter();
     }
 
     public static PdfPTable getTable(DefaultTableModel listSalles, ArrayList<String> name, float[] width) throws DocumentException, IOException {
@@ -101,7 +116,7 @@ Utils.printFromWindowsPrinter();
         return table;
     }
 
-      void ViewerCtrl(String filePath) {
+    void ViewerCtrl(String filePath) {
 
         SwingController controller = new SwingController();
 

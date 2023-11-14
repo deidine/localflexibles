@@ -111,7 +111,7 @@
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace pref="53" max="32767" attributes="0"/>
+                  <EmptySpace pref="59" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -198,7 +198,7 @@
             <Component class="javax.swing.JLabel" name="jLabel8">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="Today&apos;s Sales"/>
+                <Property name="text" type="java.lang.String" value="nombre de vente aujourduit"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lb_totalTodaySales">
@@ -321,7 +321,7 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabel10">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Products Can Be Sold"/>
+                <Property name="text" type="java.lang.String" value="produit peux vender"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lb_totalProduct">
@@ -386,7 +386,7 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="Commemoration!! There are less than 3 pieces of product in stock"/>
+                <Property name="text" type="java.lang.String" value="Attention !! il existe dans le stoque des produit inverieur a 3"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -399,7 +399,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Product stock is less than:"/>
+            <Property name="text" type="java.lang.String" value="produit inverieur de:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btn_caristok">
@@ -459,7 +459,7 @@
         </Container>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Favorite Products"/>
+            <Property name="text" type="java.lang.String" value="Produit favoriser"/>
           </Properties>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane2">
@@ -509,7 +509,7 @@
         </Container>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Today&apos;s sale"/>
+            <Property name="text" type="java.lang.String" value="vent aujourd&apos;hui"/>
           </Properties>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane3">

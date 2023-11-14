@@ -5,57 +5,17 @@
  */
 package com.inventory.Salles;
 
-import java.awt.print.PrinterJob;
-import javax.print.PrintService;
-import javax.print.PrintServiceLookup;
-import com.itextpdf.text.BaseColor;
-
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.printing.PDFPageable;
 //import org.apache.pdfbox.io.RandomAccessRead;
-import com.inventory.DTO.ProductDTO;
 import com.inventory.Database.ConnectionFactory;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Element;
-import com.itextpdf.text.List;
-import com.itextpdf.text.ListItem;
-import com.itextpdf.text.PageSize;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.BaseFont;
-import com.itextpdf.text.pdf.PdfPCell;
-import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfWriter;
-import java.awt.Desktop;
-import java.awt.Image;
-import java.awt.print.PrinterException;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.print.DocFlavor;
-import javax.print.DocPrintJob;
-import javax.print.PrintException;
-import javax.print.SimpleDoc;
-import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import org.apache.pdfbox.Loader;
 
 /**
  *
@@ -151,7 +111,7 @@ public class DataDetail extends javax.swing.JPanel {
         jPanel2.setBackground(new java.awt.Color(245, 235, 224));
 
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("Today's Sales");
+        jLabel8.setText("nombre de vente aujourduit");
 
         lb_totalTodaySales.setFont(new java.awt.Font("Bebas Neue", 0, 24)); // NOI18N
         lb_totalTodaySales.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -218,7 +178,7 @@ public class DataDetail extends javax.swing.JPanel {
 
         jPanel4.setBackground(new java.awt.Color(245, 235, 224));
 
-        jLabel10.setText("Products Can Be Sold");
+        jLabel10.setText("produit peux vender");
 
         lb_totalProduct.setFont(new java.awt.Font("Bebas Neue", 0, 24)); // NOI18N
         lb_totalProduct.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -259,7 +219,7 @@ public class DataDetail extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Commemoration!! There are less than 3 pieces of product in stock");
+        jLabel3.setText("Attention !! il existe dans le stoque des produit inverieur a 3");
 
         javax.swing.GroupLayout p_notifikasiLayout = new javax.swing.GroupLayout(p_notifikasi);
         p_notifikasi.setLayout(p_notifikasiLayout);
@@ -277,7 +237,7 @@ public class DataDetail extends javax.swing.JPanel {
         txt_stok.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_stok.setText("3");
 
-        jLabel4.setText("Product stock is less than:");
+        jLabel4.setText("produit inverieur de:");
 
         btn_caristok.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -296,7 +256,7 @@ public class DataDetail extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tb_stok);
 
-        jLabel5.setText("Favorite Products");
+        jLabel5.setText("Produit favoriser");
 
         tb_favorit.setFont(new java.awt.Font("Tw Cen MT", 1, 14)); // NOI18N
         tb_favorit.setModel(new javax.swing.table.DefaultTableModel(
@@ -309,7 +269,7 @@ public class DataDetail extends javax.swing.JPanel {
         ));
         jScrollPane2.setViewportView(tb_favorit);
 
-        jLabel6.setText("Today's sale");
+        jLabel6.setText("vent aujourd'hui");
 
         tb_laporan.setFont(new java.awt.Font("Tw Cen MT", 1, 14)); // NOI18N
         tb_laporan.setModel(new javax.swing.table.DefaultTableModel(
@@ -409,7 +369,7 @@ public class DataDetail extends javax.swing.JPanel {
                                             .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addComponent(p_notifikasi, javax.swing.GroupLayout.PREFERRED_SIZE, 917, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

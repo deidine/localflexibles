@@ -35,6 +35,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.print.Pageable;
 import java.awt.print.PrinterJob;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.net.URISyntaxException;
 import java.nio.file.FileSystem;
 import java.nio.file.Path;
@@ -1291,6 +1294,7 @@ public final class SallePage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEntrerActionPerformed
 
     private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
+      
 
         clear();   // TODO add your handling code here:
     }//GEN-LAST:event_clearButtonActionPerformed
@@ -1970,7 +1974,7 @@ public final class SallePage extends javax.swing.JFrame {
         }
     }
 
-    public void selleOrloanProduct(boolean isLoan) throws URISyntaxException, InterruptedException  {
+    public void selleOrloanProduct(boolean isLoan) throws URISyntaxException, InterruptedException {
         DefaultTableModel listSalles = (DefaultTableModel) salesTable.getModel();
         boolean tva = false;
         if (TVA.isSelected()) {
@@ -2013,7 +2017,7 @@ public final class SallePage extends javax.swing.JFrame {
 
     }
 
-    public void devisProduct(boolean isLoan) throws URISyntaxException, InterruptedException  {
+    public void devisProduct(boolean isLoan) throws URISyntaxException, InterruptedException {
         DefaultTableModel listSalles = (DefaultTableModel) salesTable.getModel();
         if (listSalles.getRowCount() != 0) {
             ProductDTO productDTO = new ProductDTO();
@@ -2055,13 +2059,12 @@ public final class SallePage extends javax.swing.JFrame {
 
     }
 
-    public void saveFile() throws URISyntaxException, InterruptedException  {
+    public void saveFile() throws URISyntaxException, InterruptedException {
 
         try {
             PdfSalle.inBaoCao(new File("deidine.pdf"), getCureentTime(), operationType.getSelectedItem().toString(), (DefaultTableModel) salesTable.getModel(),
                     getCustomerInfo(custCodeText.getText()), txtRecu.getText(), txtRendre.getText(), txtTotal.getText());
 
-           
         } catch (DocumentException ex) {
             Logger.getLogger(DataDetail.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {

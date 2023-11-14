@@ -178,28 +178,21 @@ public class Utils {
     public static void printFromWindowsPrinter() throws URISyntaxException, IOException, InterruptedException {
         CodeSource codeSource = Utils.class.getProtectionDomain().getCodeSource();
         File jarFile = new File(codeSource.getLocation().toURI().getPath());
-        String jarDir = jarFile.getParentFile().getPath();     
+        String jarDir = jarFile.getParentFile().getPath();
         String jarDirTest = jarFile.getParentFile().getParentFile().getPath();
- 
-        System.out.println(jarDir+"\\deidine.pdf");    
-        System.out.println( jarFile.getParentFile().getParentFile().getPath());
 
-        /*NOTE: processComplete=0 if correctly executed, will contain other values if not*/
-//        Process runtimeProcess = Runtime.getRuntime().exec("print.bat \""+jarDirTest+"\\deidine.pdf\"" );
-  
-//this if you want to add arg to the file that you want to run it and add the path to the pdf
-//Process runtimeProcess = Runtime.getRuntime().exec("print.bat \""+jarDir+"\\deidine.pdf\"" );
-Process runtimeProcess = Runtime.getRuntime().exec("print.bat" );
+        System.out.println(jarDir + "\\deidine.pdf");
+        System.out.println(jarFile.getParentFile().getParentFile().getPath());
 
+        Process runtimeProcess = Runtime.getRuntime().exec("print.bat");
 
         int processComplete = runtimeProcess.waitFor();
         System.out.println(processComplete);
 
-        /*NOTE: processComplete=0 if correctly executed, will contain other values if not*/
         if (processComplete == 0) {
-                    System.out.println("printed ok");
+            System.out.println("printed ok");
 
-//            JOptionPane.showMessageDialog(null, "Successfully printed : ");
+            JOptionPane.showMessageDialog(null, "L'operation est Terminer");
         } else {
             JOptionPane.showMessageDialog(null, "Error at restoring");
         }
