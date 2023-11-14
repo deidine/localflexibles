@@ -28,7 +28,7 @@ public class Utils {
     public static void main(String arg[]) throws AWTException, URISyntaxException, IOException, InterruptedException {
 //Restoredbfromsql("22 11 643 09-11-2023backup.sql");
 //        printFromWindowsPrinter();
-        //       Backupdbtosql();
+        Backupdbtosql();
     }
 
     public static void Restoredbfromsql(String s) {
@@ -69,7 +69,8 @@ public class Utils {
 
     }
 
-    public static void Backupdbtosql() throws AWTException {
+    public static int Backupdbtosql() throws AWTException {
+       int processComplete=1;
         try {
 
             /*NOTE: Getting path to the Jar file being executed*/
@@ -80,7 +81,7 @@ public class Utils {
 
 
             /*NOTE: Creating Database Constraints*/
-            String dbName = "deidine";
+            String dbName = "inventory2";
             String dbUser = "root";
             String dbPass = null;
             System.out.println(jarDir);
@@ -95,10 +96,10 @@ public class Utils {
             /*NOTE: Creating Path Constraints for backup saving*/
  /*NOTE: Here the backup is saved in a folder called backup with the name backup.sql*/
             String savePath = "\"" + jarDir + "\\backup"
-                    + "\\" + getCureentTime() + "backup.sql\"";
+                    + "\\" + "backup.sql\"";
 
             /*NOTE: Used to create a cmd command*/
-            String executeCmd = "C:\\xampp\\mysql\\bin\\mysqldump.exe -u "
+            String executeCmd = "mysqldump.exe -u "
                     + dbUser + " --database " + dbName + " -r " + savePath;
 
             Process runtimeProcess = Runtime.getRuntime().exec(new String[]{"cmd.exe", "/c", executeCmd
@@ -106,14 +107,16 @@ public class Utils {
             Robot r = new Robot();
             r.keyPress(KeyEvent.VK_ENTER);
             r.keyRelease(KeyEvent.VK_ENTER);
-            int processComplete = runtimeProcess.waitFor();
+             processComplete = runtimeProcess.waitFor();
             System.out.println(processComplete);
 //            final ProgressBar pbr = ProgressBar.getInstance();
 //            pbr.setVisible(true);
 //            pbr.initProgressBar(i);
 
             if (processComplete == 0) {
-                System.out.println("Backup Complete");
+            
+                System.out.println("Backup ddddd");
+
             } else {
                 System.out.println("Backup Failure");
             }
@@ -121,6 +124,7 @@ public class Utils {
         } catch (URISyntaxException | IOException | InterruptedException ex) {
             JOptionPane.showMessageDialog(null, "Error at Backuprestore" + ex.getMessage());
         }
+return processComplete;  
     }
 
     static String getCureentTime() {
@@ -137,9 +141,9 @@ public class Utils {
         Double totalPaye = 0.0;
         for (int i = 0; i < listSalles.getRowCount(); i++) {
             Double sellPrice = Double.valueOf(listSalles.getValueAt(i, 2).toString());
-            Double totalRevenue = sellPrice;
+//            Double totalRevenue = sellPrice;
 
-//            Double totalRevenue = sellPrice * Integer.valueOf(listSalles.getValueAt(i, 3).toString());
+            Double totalRevenue = sellPrice * Integer.valueOf(listSalles.getValueAt(i, 3).toString());
             totalPaye = totalPaye + totalRevenue;
 
         }
@@ -184,11 +188,16 @@ public class Utils {
         System.out.println(jarDir + "\\deidine.pdf");
         System.out.println(jarFile.getParentFile().getParentFile().getPath());
 
+        /*NOTE: processComplete=0 if correctly executed, will contain other values if not*/
+//        Process runtimeProcess = Runtime.getRuntime().exec("print.bat \""+jarDirTest+"\\deidine.pdf\"" );
+//this if you want to add arg to the file that you want to run it and add the path to the pdf
+//Process runtimeProcess = Runtime.getRuntime().exec("print.bat \""+jarDir+"\\deidine.pdf\"" );
         Process runtimeProcess = Runtime.getRuntime().exec("print.bat");
 
         int processComplete = runtimeProcess.waitFor();
         System.out.println(processComplete);
 
+        /*NOTE: processComplete=0 if correctly executed, will contain other values if not*/
         if (processComplete == 0) {
             System.out.println("printed ok");
 

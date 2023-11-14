@@ -392,10 +392,11 @@ this.username=username;
             }
         });
         
-        MenuItem menuBackup = new MenuItem(IconLogout, false, null, "Conserver Les Donnes", new ActionListener() {
+        MenuItem menuBackup = new MenuItem(IconLogout, false, null, "Sauvegarde", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
- 
+                    JOptionPane.showMessageDialog(null, "L'operation est Terminer");
+
                 try {
                     Utils.Backupdbtosql();
                 } catch (AWTException ex) {
