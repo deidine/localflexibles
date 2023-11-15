@@ -41,7 +41,7 @@ public class Deidine extends javax.swing.JFrame {
 
         this.setResizable(false);
         // this.addWindowListener(getWindowAdapter());
-        setIconImage(new ImageIcon("resources/logo.png").getImage());
+        this.setIconImage(new ImageIcon("resources/logo.png").getImage());  
     }
 
     /**
