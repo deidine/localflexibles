@@ -56,14 +56,14 @@ public class PayDevis extends javax.swing.JDialog {
     /**
      * Creates new form PayDevis
      */
-    public PayDevis(Object[] data) {
+    public PayDevis(Object[] data,String username) {
         try {
             conn = new ConnectionFactory().getConn();
             statement = conn.createStatement();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+this.username=username;
         this.data = data;
         initComponents();
         loadDataSet();
@@ -674,9 +674,9 @@ public class PayDevis extends javax.swing.JDialog {
             String tampilBarang = "SELECT `salesid`, `date`, `customercode`, `total_paye`, "
                     + "`recu`, `changeMony`, `soldby`,"
                     + " `productcode`, `quantity`, `isLoan`,"
-                    + " (SELECT  `productname` FROM `products` WHERE"
-                    + " productcode='" + data[7].toString() + "') as productname ,"
-                    + " `detaild`, `sellprice` FROM devisdata  where   "
+                    + " (SELECT  `productname` FROM `products` as p WHERE"
+                    + " p.productcode=s.productcode) as productname ,"
+                    + " `detaild`, `sellprice` FROM devisdata as s where   "
                     + "  customercode='" + codeText.getText() + "'";
 
             resultSet = statement.executeQuery(tampilBarang);

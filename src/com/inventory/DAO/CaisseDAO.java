@@ -5,11 +5,14 @@
 package com.inventory.DAO;
 
 import com.inventory.Database.ConnectionFactory;
+import com.inventory.Salles.PayLoan;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -46,6 +49,59 @@ public class CaisseDAO {
         }
         return resultSet;
     }
+
+    public ResultSet getSalesOnly() {
+        try {
+
+            String query = "Select `salesid`, `date`, `customercode`, `total_paye`, `recu`,"
+                    + " `changeMony`, `soldby` FROM  salesinfo ";
+
+            resultSet = statement.executeQuery(query);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return resultSet;
+    }
+
+    public boolean cancelSalle(int id) {
+        try {
+
+            String query = "Select * FROM  sale_detail where salesid  ='" + id + "'";
+
+            resultSet = statement.executeQuery(query);
+            while (resultSet.next()) {
+
+                updateQuent(resultSet.getInt("quantity"), resultSet.getString("productcode"));
+            
+            }
+            String query2 = "DELETE FROM salesinfo WHERE salesid  ='" + id + "'";
+
+            try {
+                statement.executeUpdate(query2);
+                        return true;
+
+            } catch (SQLException ex) {
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return false;
+    }
+
+    void updateQuent(int quente, String prodcode) {
+        try {
+            String query = "UPDATE products SET quantity=quantity+? WHERE productcode=?";
+            prepStatement = conn.prepareStatement(query);
+            prepStatement.setInt(1, quente);
+            prepStatement.setString(2, prodcode);
+
+            prepStatement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
     public ResultSet getSalesTVAInfo(String isTva) {
         try {
 
@@ -57,7 +113,8 @@ public class CaisseDAO {
         }
         return resultSet;
     }
-public ResultSet getSalesDevisInfo(String isloan) {
+
+    public ResultSet getSalesDevisInfo(String isloan) {
         try {
 
             String query = "SELECT `salesid`, `date`, `customercode`, `total_paye`, `recu`,"
@@ -126,6 +183,23 @@ public ResultSet getSalesDevisInfo(String isloan) {
         }
         return resultSet;
     }
+
+    public ResultSet getSalesOnlySearchInfo(String text) {
+        try {
+
+            String query = "SELECT `salesid`, `date`, `customercode`, `total_paye`, `recu`, "
+                    + "`changeMony`, `soldby`"
+                    + "FROM "
+                    + "salesinfo where "
+                    + " customercode LIKE '%" + text + "%'  ORDER BY salesid";
+
+            resultSet = statement.executeQuery(query);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return resultSet;
+    }
+
     public ResultSet getSalesTVASearchInfo(String text, String isTva) {
         try {
 
@@ -140,7 +214,8 @@ public ResultSet getSalesDevisInfo(String isloan) {
         }
         return resultSet;
     }
-public ResultSet getSalesDevisSearchInfo(String text, String isLoan) {
+
+    public ResultSet getSalesDevisSearchInfo(String text, String isLoan) {
         try {
 
             String query = "SELECT `salesid`, `date`, `customercode`, `total_paye`, `recu`, "
@@ -194,7 +269,23 @@ public ResultSet getSalesDevisSearchInfo(String text, String isLoan) {
             throwables.printStackTrace();
         }
         return resultSet;
-    }public ResultSet getDateOfSalesTvaSearchInfo(String start, String end, String isTva) {
+    }
+
+    public ResultSet getDateOfSalesOnlySearchInfo(String start, String end) {
+        try {
+
+            String query = "SELECT `salesid`, `date`, `customercode`, `total_paye`, "
+                    + "`recu`, `changeMony`, `soldby` FROM salesinfo where"
+                    + " date BETWEEN '" + start + "' and '" + end + "' ";
+
+            resultSet = statement.executeQuery(query);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return resultSet;
+    }
+
+    public ResultSet getDateOfSalesTvaSearchInfo(String start, String end, String isTva) {
         try {
 
             String query = "SELECT * FROM salesinfo where date BETWEEN '" + start + "' and '" + end + "' and isTva= '" + isTva + "'";
@@ -205,7 +296,8 @@ public ResultSet getSalesDevisSearchInfo(String text, String isLoan) {
         }
         return resultSet;
     }
-public ResultSet getDateOfSalesDevisSearchInfo(String start, String end, String isLoan) {
+
+    public ResultSet getDateOfSalesDevisSearchInfo(String start, String end, String isLoan) {
         try {
 
             String query = "SELECT * FROM devisdata where date BETWEEN '" + start + "' and '" + end + "' and isLoan= '" + isLoan + "'";

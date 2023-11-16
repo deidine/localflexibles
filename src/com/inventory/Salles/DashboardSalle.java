@@ -18,6 +18,7 @@ import com.inventory.Salles.DataDetail;
 import java.awt.AWTException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 /**
  *
  * @author deidine
@@ -28,17 +29,18 @@ public class DashboardSalle extends javax.swing.JFrame {
      * Creates new form DashboardSalle
      */
     public static boolean tutup = false;
-String username;
+    String username;
+
     public DashboardSalle(String username, String level) {
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-this.username=username;
+        this.username = username;
         lb_nama.setText(username);
         lb_level.setText(level);
         execute();
         Date();
-          System.out.println("eheh"+this.username);
-  }
+        System.out.println("eheh" + this.username);
+    }
 
     private void Date() {
         Date TanggalSekarang = new Date();
@@ -328,15 +330,16 @@ this.username=username;
                 pn_utama.repaint();
                 pn_utama.revalidate();
             }
-        }); MenuItem devisMenu = new MenuItem(null, true, IconBarang, "Afficher A_Devis", new ActionListener() {
+        });
+        MenuItem devisMenu = new MenuItem(null, true, IconBarang, "Afficher A_Devis", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 pn_utama.removeAll();
-                pn_utama.add(new InformationDevis());
+                pn_utama.add(new InformationDevis(username));
                 pn_utama.repaint();
                 pn_utama.revalidate();
             }
-        }); 
+        });
         MenuItem tvaMenu = new MenuItem(null, true, IconBarang, "Afficher TVA", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -374,7 +377,7 @@ this.username=username;
             }
         });
         MenuItem menuMasterPemilik = new MenuItem(IconMaster, false, null, "Master", null);//, masKategory, masMerek, masSupplier, masUser);
-        MenuItem menuTransaction = new MenuItem(IconTransaksi, false, null, "Transaction", null, salleMenu, loanMenu,devisMenu,tvaMenu);//, Sell, Restock);
+        MenuItem menuTransaction = new MenuItem(IconTransaksi, false, null, "Transaction", null, salleMenu, loanMenu, devisMenu, tvaMenu);//, Sell, Restock);
         MenuItem menuCaisse = new MenuItem(IconTransaksi, false, null, "La Caisse", null, CaisseloanMenu, CaisseSalleMenu);//, Sell, Restock);
         MenuItem menuDataRaport = new MenuItem(IconTransaksi, false, null, "raport Aujourd'huit", null, menuReporSalle);//, Sell, Restock);
 
@@ -386,27 +389,31 @@ this.username=username;
                 JOptionPane.setRootFrame(null);
                 if (a == JOptionPane.YES_OPTION) {
                     dispose();
-                       new SallePage(username).setVisible(true);
+                    new SallePage(username).setVisible(true);
 //                    System.exit(0);
                 }
             }
         });
-        
-        MenuItem menuBackup = new MenuItem(IconLogout, false, null, "Sauvegarde", new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                    JOptionPane.showMessageDialog(null, "L'operation est Terminer");
 
+        MenuItem menuBackup = new MenuItem(IconLogout, false, null, "sauvegarde", new ActionListener() {
+ 
+                   @Override
+             
+            public void actionPerformed(ActionEvent e) {
+                   JOptionPane.showMessageDialog(null, "L'operation est Terminer");
+           
                 try {
-                    Utils.Backupdbtosql();
+                     Utils.Backupdbtosql();
                 } catch (AWTException ex) {
                     Logger.getLogger(DashboardSalle.class.getName()).log(Level.SEVERE, null, ex);
                 }
- 
+                 
+                
             }
+            
         });
 
-        addMenu(menuMasterPemilik, menuDataRaport, menuTransaction, menuCaisse, menuLogOut,menuBackup);
+        addMenu(menuMasterPemilik, menuDataRaport, menuTransaction, menuCaisse, menuLogOut, menuBackup);
 
     }
 

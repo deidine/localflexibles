@@ -317,7 +317,7 @@ public class InformationLoan extends javax.swing.JPanel {
     }//GEN-LAST:event_bntPayActionPerformed
 
     private void bntPay1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntPay1ActionPerformed
-        float[] width = new float[]{20f, 30f, 30f, 40f, 20f, 20f, 20f, 20f, 20f };
+        float[] width = new float[]{20f, 30f, 30f, 40f, 20f, 20f, 20f};
         ArrayList<String> name = new ArrayList<>();
         name.add("NUM");
         name.add("date");
@@ -326,8 +326,6 @@ public class InformationLoan extends javax.swing.JPanel {
         name.add("recu");
         name.add("retrner");
         name.add("vend_par");
-        name.add("cod_prod");
-        name.add("quentie");
 
         String description = "les impeyee table";
   

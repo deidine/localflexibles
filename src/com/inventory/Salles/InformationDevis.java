@@ -22,11 +22,12 @@ public class InformationDevis extends javax.swing.JPanel {
     DevisTable sltbl = new DevisTable();
     Date dates = new Date();
     DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-
+String username;
     /**
      * Creates new form InformationDevis
      */
-    public InformationDevis() {
+    public InformationDevis(String username) {
+        this.username=username;
         initComponents();
     }
 
@@ -277,7 +278,7 @@ public class InformationDevis extends javax.swing.JPanel {
                 data[i] = tabelInformation.getValueAt(row, i);
             }
             if (tabelInformation.getValueAt(row, 0) != null){
-                new PayDevis(data);
+                new PayDevis(data,this.username);
             }
 
         }

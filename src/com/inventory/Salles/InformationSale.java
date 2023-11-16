@@ -4,8 +4,9 @@
  */
 package com.inventory.Salles;
 
+import com.inventory.DAO.CaisseDAO;
 import com.inventory.raport.PDFTable;
-import com.inventory.tables.SalleTable;
+import com.inventory.tables.SalleTable2;
 import com.itextpdf.text.DocumentException;
 import java.io.File;
 import java.io.IOException;
@@ -19,6 +20,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.logging.Level;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -27,7 +29,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class InformationSale extends javax.swing.JPanel {
 
-    SalleTable sltbl = new SalleTable();
+    SalleTable2 sltbl = new SalleTable2();
     Date dates = new Date();
     DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
@@ -64,10 +66,11 @@ public class InformationSale extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         bntPay = new javax.swing.JButton();
+        bntPay1 = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(153, 255, 255));
 
-        tabelInformation.setModel(sltbl.generateTable("false"));
+        tabelInformation.setModel(sltbl.generateTable());
         tabelInformation.setIntercellSpacing(new java.awt.Dimension(10, 5));
         tabelInformation.setOpaque(true);
         tabelInformation.setRowHeight(30);
@@ -159,6 +162,16 @@ public class InformationSale extends javax.swing.JPanel {
             }
         });
 
+        bntPay1.setBackground(new java.awt.Color(102, 102, 0));
+        bntPay1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        bntPay1.setForeground(new java.awt.Color(255, 255, 255));
+        bntPay1.setText("Annuller Vente");
+        bntPay1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntPay1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelMainButtonLayout = new javax.swing.GroupLayout(panelMainButton);
         panelMainButton.setLayout(panelMainButtonLayout);
         panelMainButtonLayout.setHorizontalGroup(
@@ -178,16 +191,18 @@ public class InformationSale extends javax.swing.JPanel {
                         .addComponent(jLabel5)
                         .addGap(0, 0, 0)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(panelMainButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(panelMainButtonLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 368, Short.MAX_VALUE)
+                .addGap(12, 12, 12)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelMainButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(bntPay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bntPay1, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelMainButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMainButtonLayout.createSequentialGroup()
+                        .addGap(192, 192, 192)
                         .addComponent(jLabel4))
-                    .addGroup(panelMainButtonLayout.createSequentialGroup()
-                        .addGap(69, 69, 69)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bntPay, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMainButtonLayout.createSequentialGroup()
                         .addComponent(jTextSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(search)
@@ -211,27 +226,31 @@ public class InformationSale extends javax.swing.JPanel {
                             .addGroup(panelMainButtonLayout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jLabel1)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)))
-                .addGroup(panelMainButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelMainButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(searchDate, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(panelMainButtonLayout.createSequentialGroup()
-                            .addComponent(endDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addContainerGap())
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMainButtonLayout.createSequentialGroup()
-                            .addGroup(panelMainButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel3))
-                            .addGap(15, 15, 15))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMainButtonLayout.createSequentialGroup()
-                            .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addContainerGap())
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)))
+                .addGroup(panelMainButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(searchDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(panelMainButtonLayout.createSequentialGroup()
+                        .addComponent(endDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMainButtonLayout.createSequentialGroup()
                         .addGroup(panelMainButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(bntPay, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addGap(15, 15, 15))
+                    .addGroup(panelMainButtonLayout.createSequentialGroup()
+                        .addComponent(search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panelMainButtonLayout.createSequentialGroup()
+                        .addComponent(jTextSearch)
+                        .addContainerGap())
+                    .addGroup(panelMainButtonLayout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(bntPay1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
+            .addGroup(panelMainButtonLayout.createSequentialGroup()
+                .addComponent(bntPay, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(panelMainButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMainButtonLayout.createSequentialGroup()
                     .addContainerGap(35, Short.MAX_VALUE)
@@ -282,7 +301,7 @@ public class InformationSale extends javax.swing.JPanel {
     }//GEN-LAST:event_searchDateActionPerformed
 
     private void bntPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntPayActionPerformed
-        float[] width = new float[]{20f, 30f, 30f, 40f, 20f, 20f, 20f, 20f, 20f};
+        float[] width = new float[]{20f, 30f, 30f, 40f, 20f, 20f, 20f};
         ArrayList<String> name = new ArrayList<>();
         name.add("NUM");
         name.add("date");
@@ -291,9 +310,6 @@ public class InformationSale extends javax.swing.JPanel {
         name.add("recu");
         name.add("retrner");
         name.add("vend_par");
-        name.add("cod_prod");
-        name.add("quentie");
-
         String description = "vende table";
 
         try {
@@ -312,6 +328,22 @@ public class InformationSale extends javax.swing.JPanel {
         }
 
     }//GEN-LAST:event_bntPayActionPerformed
+
+    private void bntPay1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntPay1ActionPerformed
+        CaisseDAO caiss = new CaisseDAO();
+        int row = tabelInformation.getSelectedRow();
+        DefaultTableModel listSalles = (DefaultTableModel) tabelInformation.getModel();
+        int id = Integer.valueOf(listSalles.getValueAt(row, 0).toString());
+          int a = JOptionPane.showConfirmDialog(null, "tu veux fermer le system?", "Select", JOptionPane.YES_NO_OPTION);
+                JOptionPane.setRootFrame(null);
+                if (a == JOptionPane.YES_OPTION) {
+        if (caiss.cancelSalle(id)) {
+            JOptionPane.showMessageDialog(null, "Le vente Est annuler.");
+            tabelInformation.setModel(sltbl.generateTable());
+        }
+                }
+// TODO add your handling code here:
+    }//GEN-LAST:event_bntPay1ActionPerformed
     private String getCureentTime() {
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -322,6 +354,7 @@ public class InformationSale extends javax.swing.JPanel {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntPay;
+    private javax.swing.JButton bntPay1;
     private com.toedter.calendar.JDateChooser endDate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -341,12 +374,12 @@ public class InformationSale extends javax.swing.JPanel {
 
     private void loadSearchDataSale(String text) {
 
-        tabelInformation.setModel(sltbl.generateSearchTable(text, "false"));
+        tabelInformation.setModel(sltbl.generateSearchTable(text));
     }
 
     private void loadSearchDataSaleByDate(String start, String end) {
 
-        tabelInformation.setModel(sltbl.generateSearchDateTable(start, end, "false"));
+        tabelInformation.setModel(sltbl.generateSearchDateTable(start, end));
     }
 
     private String stringToDaTe(Date s) {

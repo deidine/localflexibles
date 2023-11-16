@@ -177,7 +177,10 @@ public class PdfSalle {
         table.addCell(new PdfPCell(new Paragraph(name.get(2), fontChung1)));
         table.addCell(new PdfPCell(new Paragraph(name.get(3), fontChung1)));
         table.addCell(new PdfPCell(new Paragraph(name.get(4), fontChung1)));
-
+//PdfPCell cel3= new PdfPCell();
+//        cel3.setBorder(2);
+//        cel3.addElement(new Paragraph(  ""));
+        
         for (int i = 0; i < listSalles.getRowCount(); i++) {
 
             table.addCell(new PdfPCell(new Paragraph(i + 1 + "")));

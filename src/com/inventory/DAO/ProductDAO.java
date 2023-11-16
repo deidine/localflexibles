@@ -14,12 +14,6 @@ import java.sql.*;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Vector;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -559,18 +553,18 @@ public class ProductDAO {
     }
 
     public void report(int id) {
-        try {
-            String report = ("src/com/raport/nota_penjualan.jrxml");
-            HashMap hash = new HashMap();
-            System.out.println("Tidak d  " + report);
-
-            hash.put("kode", id);
-            JasperReport JRpt = JasperCompileManager.compileReport(report);
-            JasperPrint JPrint = JasperFillManager.fillReport(JRpt, hash, conn);
-            JasperViewer.viewReport(JPrint, false);
-        } catch (JRException e) {
-            System.out.println("Tidak dapat menampilkan struk karena " + e);
-        }
+//        try {
+//            String report = ("src/com/raport/nota_penjualan.jrxml");
+//            HashMap hash = new HashMap();
+//            System.out.println("Tidak d  " + report);
+//
+//            hash.put("kode", id);
+//            JasperReport JRpt = JasperCompileManager.compileReport(report);
+//            JasperPrint JPrint = JasperFillManager.fillReport(JRpt, hash, conn);
+//            JasperViewer.viewReport(JPrint, false);
+//        } catch (JRException e) {
+//            System.out.println("Tidak dapat menampilkan struk karena " + e);
+//        }
 
     }
 
@@ -647,7 +641,7 @@ public class ProductDAO {
     // Search method for products
     public ResultSet getProductSearch2(String text) {
         try {
-            String query = "SELECT  `productcode`, `productname`,  `brand`,"
+            String query = "SELECT  `productcode`, `productname`, `costprice`,`sellprice`, `brand`,"
                     + "  `quantity` FROM products "
                     + "WHERE productcode LIKE '%" + text + "%' OR productname LIKE '%" + text + "%' OR brand LIKE '%"
                     + text + "%'";

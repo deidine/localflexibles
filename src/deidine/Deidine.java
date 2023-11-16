@@ -53,20 +53,20 @@ public class Deidine extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         userType = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         headerLogin = new javax.swing.JLabel();
-        labelPengguna = new javax.swing.JLabel();
         txtFieldUsername = new javax.swing.JTextField();
-        labelPass = new javax.swing.JLabel();
         txtPass = new javax.swing.JPasswordField();
         clearButton = new javax.swing.JButton();
         loginButton = new javax.swing.JButton();
         activatePassField = new javax.swing.JCheckBox();
+        labelPengguna = new javax.swing.JLabel();
+        labelPass = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,8 +76,6 @@ public class Deidine extends javax.swing.JFrame {
                 userTypeActionPerformed(evt);
             }
         });
-
-        jLabel1.setText("Role Dans Le System");
 
         jPanel1.setBackground(new java.awt.Color(85, 225, 248));
 
@@ -89,24 +87,23 @@ public class Deidine extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(headerLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
-                                .addContainerGap()));
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(headerLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+                .addContainerGap())
+        );
         jPanel1Layout.setVerticalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(headerLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
-                                .addContainerGap()));
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(headerLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
-        ImageIcon iconuser = new ImageIcon(
-                new ImageIcon("resources/login.png").getImage().getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH));
+        ImageIcon iconuser = new ImageIcon(new ImageIcon("resources/login.png").getImage().
+            getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH));
         headerLogin.setIcon(iconuser);
-
-        labelPengguna.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        labelPengguna.setText("username");
 
         txtFieldUsername.setMargin(new java.awt.Insets(0, 5, 0, 5));
         txtFieldUsername.addActionListener(new java.awt.event.ActionListener() {
@@ -115,10 +112,12 @@ public class Deidine extends javax.swing.JFrame {
             }
         });
 
-        labelPass.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        labelPass.setText("password");
-
         txtPass.setMargin(new java.awt.Insets(0, 5, 0, 5));
+        txtPass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPassActionPerformed(evt);
+            }
+        });
         txtPass.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtPassKeyPressed(evt);
@@ -162,85 +161,83 @@ public class Deidine extends javax.swing.JFrame {
             }
         });
 
+        labelPengguna.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        labelPengguna.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        labelPengguna.setText("USERNAME");
+
+        labelPass.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        labelPass.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        labelPass.setText("PASSWORD");
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setText("Role Dans Le System");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                Short.MAX_VALUE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(25, 25, 25)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(labelPengguna, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addComponent(txtPass)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(activatePassField))
-                                        .addComponent(labelPass, javax.swing.GroupLayout.Alignment.TRAILING,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(txtFieldUsername, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(userType, 0, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                Short.MAX_VALUE))
-                                .addGap(25, 25, 25))
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(33, 33, 33)
-                                .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 109,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(51, 51, 51)
-                                .addComponent(clearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 109,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(98, Short.MAX_VALUE)));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(txtFieldUsername, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(userType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(labelPengguna, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtPass))
+                .addGap(0, 0, 0)
+                .addComponent(activatePassField))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51)
+                .addComponent(clearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(98, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(labelPass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
+        );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(labelPengguna)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtFieldUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 37,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(labelPass)
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 37,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(activatePassField, javax.swing.GroupLayout.PREFERRED_SIZE, 28,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 15,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(userType, javax.swing.GroupLayout.PREFERRED_SIZE, 34,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(24, 24, 24)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(clearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(31, 31, 31)));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(9, 9, 9)
+                .addComponent(labelPengguna, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtFieldUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(labelPass, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(activatePassField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(userType, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(clearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31))
+        );
 
-        ImageIcon icon = new ImageIcon(new ImageIcon("resources/remove-button.png").getImage().getScaledInstance(30, 30,
-                java.awt.Image.SCALE_SMOOTH));
+        ImageIcon icon = new ImageIcon(new ImageIcon("resources/remove-button.png").getImage().
+            getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH));
         clearButton.setIcon(icon);
-        ImageIcon iconlog = new ImageIcon(new ImageIcon("resources/login 1.png").getImage().getScaledInstance(30, 30,
-                java.awt.Image.SCALE_SMOOTH));
+        ImageIcon iconlog = new ImageIcon(new ImageIcon("resources/login 1.png").getImage().
+            getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH));
         loginButton.setIcon(iconlog);
-        ImageIcon iconshow = new ImageIcon(
-                new ImageIcon("resources/show.png").getImage().getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH));
+        ImageIcon iconshow = new ImageIcon(new ImageIcon("resources/show.png").getImage().
+            getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH));
 
         activatePassField.setIcon(iconshow);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPassActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPassActionPerformed
 
     private void activatePassFieldActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_activatePassFieldActionPerformed
         if (activatePassField.isSelected()) {
