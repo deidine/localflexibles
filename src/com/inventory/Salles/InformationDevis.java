@@ -4,20 +4,24 @@
  */
 package com.inventory.Salles;
 
+import com.inventory.DAO.CaisseDAO;
 import com.inventory.tables.DevisTable;
 import com.inventory.tables.SalleTable;
+import com.inventory.tables.SalleTable2;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author deidine
  */
 public class InformationDevis extends javax.swing.JPanel {
+    SalleTable2 sltbl2 = new SalleTable2();
 
     DevisTable sltbl = new DevisTable();
     Date dates = new Date();
@@ -55,8 +59,9 @@ String username;
         jSeparator1 = new javax.swing.JSeparator();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        bntPay = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
+        cancelSale = new javax.swing.JButton();
+        bntPay = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(153, 255, 255));
 
@@ -142,16 +147,6 @@ String username;
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("chercher par date");
 
-        bntPay.setBackground(new java.awt.Color(102, 102, 0));
-        bntPay.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        bntPay.setForeground(new java.awt.Color(255, 255, 255));
-        bntPay.setText("Valide La Devis");
-        bntPay.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntPayActionPerformed(evt);
-            }
-        });
-
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         javax.swing.GroupLayout panelMainButtonLayout = new javax.swing.GroupLayout(panelMainButton);
@@ -160,10 +155,8 @@ String username;
             panelMainButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelMainButtonLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(bntPay, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(panelMainButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelMainButtonLayout.createSequentialGroup()
-                        .addGap(43, 43, 43)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMainButtonLayout.createSequentialGroup()
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(50, 50, 50)
                         .addComponent(jLabel2)
@@ -181,8 +174,7 @@ String username;
                         .addComponent(jTextSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(search))
-                    .addGroup(panelMainButtonLayout.createSequentialGroup()
-                        .addGap(76, 76, 76)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMainButtonLayout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -193,7 +185,7 @@ String username;
         panelMainButtonLayout.setVerticalGroup(
             panelMainButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMainButtonLayout.createSequentialGroup()
-                .addContainerGap(8, Short.MAX_VALUE)
+                .addGap(8, 8, 8)
                 .addGroup(panelMainButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
@@ -202,23 +194,20 @@ String username;
                 .addGroup(panelMainButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator2)
                     .addGroup(panelMainButtonLayout.createSequentialGroup()
+                        .addGap(2, 2, 2)
                         .addGroup(panelMainButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelMainButtonLayout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addGroup(panelMainButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(panelMainButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(endDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMainButtonLayout.createSequentialGroup()
-                                            .addComponent(jLabel2)
-                                            .addGap(15, 15, 15))
-                                        .addComponent(search, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMainButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jTextSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(searchDate, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel3)
-                                    .addComponent(startDate, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(bntPay, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelMainButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(endDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMainButtonLayout.createSequentialGroup()
+                                    .addComponent(jLabel2)
+                                    .addGap(15, 15, 15))
+                                .addComponent(search, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMainButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jTextSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(searchDate, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel3)
+                            .addComponent(startDate, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 8, Short.MAX_VALUE))))
         );
 
@@ -227,19 +216,48 @@ String username;
         ImageIcon iconBtnCekLaporan4 = new ImageIcon(new ImageIcon("resources/check.png").getImage().
             getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH));
 
+        cancelSale.setBackground(new java.awt.Color(255, 51, 51));
+        cancelSale.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        cancelSale.setForeground(new java.awt.Color(255, 255, 255));
+        cancelSale.setText("Annuller Devis");
+        cancelSale.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelSaleActionPerformed(evt);
+            }
+        });
+
+        bntPay.setBackground(new java.awt.Color(102, 255, 51));
+        bntPay.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        bntPay.setForeground(new java.awt.Color(255, 255, 255));
+        bntPay.setText("Valide La Devis");
+        bntPay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntPayActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(panelMainButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cancelSale, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bntPay, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelMainButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panelMainButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelMainButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(cancelSale, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bntPay, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -285,9 +303,25 @@ String username;
         // TODO add your handling code here:
     }//GEN-LAST:event_bntPayActionPerformed
 
+    private void cancelSaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelSaleActionPerformed
+        CaisseDAO caiss = new CaisseDAO();
+        int row = tabelInformation.getSelectedRow();
+        DefaultTableModel listSalles = (DefaultTableModel) tabelInformation.getModel();
+        int id = Integer.valueOf(listSalles.getValueAt(row, 0).toString());
+        int a = JOptionPane.showConfirmDialog(null, "tu veux fermer le system?", "Select", JOptionPane.YES_NO_OPTION);
+        JOptionPane.setRootFrame(null);
+        if (a == JOptionPane.YES_OPTION) {
+            if (caiss.cancelDevis(id)) {
+                JOptionPane.showMessageDialog(null, "Le vente Est annuler.");
+                tabelInformation.setModel(sltbl.generateTable("true"));
+            }
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_cancelSaleActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntPay;
+    private javax.swing.JButton cancelSale;
     private com.toedter.calendar.JDateChooser endDate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -81,7 +81,7 @@ public class Utils {
 
 
             /*NOTE: Creating Database Constraints*/
-            String dbName = "inventory2";
+            String dbName = "localflexible";
             String dbUser = "root";
             String dbPass = null;
             System.out.println(jarDir);
@@ -143,7 +143,8 @@ return processComplete;
             Double sellPrice = Double.valueOf(listSalles.getValueAt(i, 2).toString());
 //            Double totalRevenue = sellPrice;
 
-            Double totalRevenue = sellPrice * Integer.valueOf(listSalles.getValueAt(i, 3).toString());
+            Double totalRevenue = sellPrice ;
+//            * Integer.valueOf(listSalles.getValueAt(i, 3).toString());
             totalPaye = totalPaye + totalRevenue;
 
         }

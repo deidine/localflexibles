@@ -32,6 +32,7 @@ void setMesureRakor(int mesure_rakor){
     public void setSalleID(int salleID) {
         this.salleID = salleID;
     }
+    
     public int getSalleID() {
         return salleID;
     }

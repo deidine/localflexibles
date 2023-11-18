@@ -15,7 +15,6 @@ import com.inventory.DAO.ProductDAO;
 import com.inventory.DAO.UserDAO;
 import com.inventory.DTO.ProductDTO;
 import com.inventory.UI.Clientform;
-import com.inventory.print.ViewerCtrl;
 import com.inventory.tables.ClientTable2;
 import com.inventory.tables.ListSalle;
 import com.inventory.tables.ProductTable2;
@@ -24,23 +23,15 @@ import java.util.logging.Logger;
 import java.io.File;
 import java.text.ParseException;
 import java.io.IOException;
-
-import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 
 import com.inventory.raport.PdfSalle;
 import java.awt.Color;
-import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.awt.print.Pageable;
-import java.awt.print.PrinterJob;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.net.URISyntaxException;
-import java.nio.file.FileSystem;
-import java.nio.file.Path;
 import java.util.Locale;
 
 /**
@@ -68,16 +59,25 @@ public final class SallePage extends javax.swing.JFrame {
     public SallePage(String username) {
 
         initComponents();
+
         this.username = username;
         loadSearchDataProduct("");
-        System.out.println("eheh" + this.username);
-
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        vendeur.setText("Vendeur " + this.username);
 
         setIconImage(new ImageIcon("resources/logo.png").getImage());
         isKnowedCLient();
         isUNKnowedCLient();
 
+        this.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                if (moneyToCaisse > 0.0) {
+                    putMoneyInCaisse();
+                    moneyToCaisse = 0.0;
+
+                }
+            }
+        });
     }
 
     /**
@@ -415,7 +415,6 @@ public final class SallePage extends javax.swing.JFrame {
 
         vendeur.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         vendeur.setForeground(new java.awt.Color(255, 255, 255));
-        vendeur.setText("Employee "+this.username);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -704,7 +703,6 @@ public final class SallePage extends javax.swing.JFrame {
         );
 
         sellPanel.setBackground(new java.awt.Color(0, 102, 102));
-        sellPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Point De Vente ENTRER LA QUANTITE DU PRODUIT VENDER PUI CLIQUE ENTRER DANS "));
 
         jPanel12.setBackground(new java.awt.Color(0, 102, 102));
 
@@ -999,7 +997,7 @@ public final class SallePage extends javax.swing.JFrame {
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
@@ -1249,16 +1247,22 @@ public final class SallePage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalleActionPerformed
 
     private void btnCaisseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCaisseActionPerformed
-        new DashboardSalle(this.username, "Bien Venu").setVisible(true);
-        this.dispose();
-        // TODO add your handling code here:
+        if (moneyToCaisse > 0.0) {
+            putMoneyInCaisse();
+            moneyToCaisse = 0.0;
+            new DashboardSalle(this.username, "Bien Venu").setVisible(true);
+            this.dispose();
+        } else {
+            new DashboardSalle(this.username, "Bien Venu").setVisible(true);
+            this.dispose();
+        }
+
+// TODO add your handling code here:
     }//GEN-LAST:event_btnCaisseActionPerformed
 
     private void btnSalle2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalle2ActionPerformed
         putMoneyInCaisse();
         moneyToCaisse = 0.0;
-        System.out.println(moneyToCaisse + " moneyToCaisse");
-
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSalle2ActionPerformed
 
@@ -1294,7 +1298,6 @@ public final class SallePage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEntrerActionPerformed
 
     private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
-      
 
         clear();   // TODO add your handling code here:
     }//GEN-LAST:event_clearButtonActionPerformed
@@ -1627,7 +1630,6 @@ public final class SallePage extends javax.swing.JFrame {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date dates = new Date();
 
-//System.out.println( dateFormat.format(dates));
         return dateFormat.format(dates);
 
     }
@@ -1883,7 +1885,7 @@ public final class SallePage extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SallePage("deodone").setVisible(true);
+                new SallePage("deidine").setVisible(true);
             }
         });
     }
@@ -2002,6 +2004,7 @@ public final class SallePage extends javax.swing.JFrame {
                 productDTO2.setProdCode(listSalles.getValueAt(i, 1).toString());
 
                 productDTO2.setQuantity(Integer.parseInt(listSalles.getValueAt(i, 3).toString()));
+                productDTO2.setSellPrice(Double.parseDouble(listSalles.getValueAt(i, 2).toString()));
                 new ProductDAO().sellDetailProductDAO(productDTO2, id);
             }
             saveFile();
@@ -2040,6 +2043,7 @@ public final class SallePage extends javax.swing.JFrame {
                 productDTO2.setDate(listSalles.getValueAt(i, 4).toString());
                 productDTO2.setCustCode(listSalles.getValueAt(i, 0).toString());
                 productDTO2.setProdCode(listSalles.getValueAt(i, 1).toString());
+                productDTO2.setSellPrice(Double.parseDouble(listSalles.getValueAt(i, 2).toString()));
 
                 productDTO2.setQuantity(Integer.parseInt(listSalles.getValueAt(i, 3).toString()));
                 new ProductDAO().sellDevisDetailProductDAO(productDTO2, id);

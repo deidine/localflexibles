@@ -56,14 +56,14 @@ public class PayDevis extends javax.swing.JDialog {
     /**
      * Creates new form PayDevis
      */
-    public PayDevis(Object[] data,String username) {
+    public PayDevis(Object[] data, String username) {
         try {
             conn = new ConnectionFactory().getConn();
             statement = conn.createStatement();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-this.username=username;
+        this.username = username;
         this.data = data;
         initComponents();
         loadDataSet();
@@ -110,7 +110,6 @@ this.username=username;
         jLabel13 = new javax.swing.JLabel();
         operationType = new javax.swing.JComboBox<>();
         TVA = new javax.swing.JCheckBox();
-        btnPay1 = new javax.swing.JButton();
         btnEntrer1 = new javax.swing.JButton();
         btnAll = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
@@ -289,16 +288,6 @@ this.username=username;
             }
         });
 
-        btnPay1.setBackground(new java.awt.Color(255, 0, 0));
-        btnPay1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnPay1.setForeground(new java.awt.Color(255, 255, 255));
-        btnPay1.setText("Suprimer");
-        btnPay1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPay1ActionPerformed(evt);
-            }
-        });
-
         btnEntrer1.setBackground(new java.awt.Color(204, 153, 255));
         btnEntrer1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnEntrer1.setForeground(new java.awt.Color(255, 255, 51));
@@ -362,9 +351,7 @@ this.username=username;
                             .addComponent(operationType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtTotal)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnPay1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnPay, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnPay, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(btnDelAll, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnAll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -411,8 +398,7 @@ this.username=username;
                 .addComponent(TVA)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPay, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnPay1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(50, 50, 50))
         );
 
         devisTable.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -578,10 +564,6 @@ this.username=username;
         totalValue();        // TODO add your handling code here:
     }//GEN-LAST:event_TVAActionPerformed
 
-    private void btnPay1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPay1ActionPerformed
-        delteDevis(); // TODO add your handling code here:
-    }//GEN-LAST:event_btnPay1ActionPerformed
-
     private void btnEntrer1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEntrer1MouseEntered
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEntrer1MouseEntered
@@ -622,7 +604,6 @@ this.username=username;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEntrer1;
     private javax.swing.JButton btnPay;
-    private javax.swing.JButton btnPay1;
     private javax.swing.JTextField codeText;
     private javax.swing.JTable devisTable;
     private javax.swing.JLabel jLabel1;
@@ -677,7 +658,7 @@ this.username=username;
                     + " (SELECT  `productname` FROM `products` as p WHERE"
                     + " p.productcode=s.productcode) as productname ,"
                     + " `detaild`, `sellprice` FROM devisdata as s where   "
-                    + "  customercode='" + codeText.getText() + "'";
+                    + "  customercode='" + codeText.getText() + "' and salesid='" + data[0].toString() + "'";
 
             resultSet = statement.executeQuery(tampilBarang);
 
@@ -844,6 +825,7 @@ this.username=username;
                 productDTO2.setDate(listSalles.getValueAt(i, 4).toString());
                 productDTO2.setCustCode(listSalles.getValueAt(i, 0).toString());
                 productDTO2.setProdCode(listSalles.getValueAt(i, 1).toString());
+                productDTO2.setSellPrice(Double.parseDouble(listSalles.getValueAt(i, 2).toString()));
 
                 productDTO2.setQuantity(Integer.parseInt(listSalles.getValueAt(i, 3).toString()));
                 new ProductDAO().sellDetailProductDAO(productDTO2, id);

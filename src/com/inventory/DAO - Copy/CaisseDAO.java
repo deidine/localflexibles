@@ -41,7 +41,7 @@ public class CaisseDAO {
         try {
 
             String query = "SELECT `salesid`, `date`, `customercode`, `total_paye`, `recu`,"
-                    + "`changeMony`, `soldby`  FROM   salesinfo where isLoan='" + isloan + "' ";
+                    + "`changeMony`, `soldby`, `productcode`, `quantity`,  `detaild`  FROM   salledata where isLoan='" + isloan + "' ";
 
             resultSet = statement.executeQuery(query);
         } catch (SQLException throwables) {
@@ -88,31 +88,6 @@ public class CaisseDAO {
 
         return false;
     }
-public boolean cancelDevis(int id) {
-        try {
-
-            String query = "Select * FROM  sale_devis_detail where salesid  ='" + id + "'";
-
-            resultSet = statement.executeQuery(query);
-            while (resultSet.next()) {
-
-                updateQuent(resultSet.getInt("quantity"), resultSet.getString("productcode"));
-            
-            }
-            String query2 = "DELETE FROM salesdevis WHERE salesid  ='" + id + "'";
-
-            try {
-                statement.executeUpdate(query2);
-                        return true;
-
-            } catch (SQLException ex) {
-            }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-
-        return false;
-    }
 
     void updateQuent(int quente, String prodcode) {
         try {
@@ -143,7 +118,7 @@ public boolean cancelDevis(int id) {
         try {
 
             String query = "SELECT `salesid`, `date`, `customercode`, `total_paye`, `recu`,"
-                    + "`changeMony`, `soldby`   FROM   salesdevis where isLoan='" + isloan + "' ";
+                    + "`changeMony`, `soldby`, `productcode`, `quantity`   FROM   devisdata where isLoan='" + isloan + "' ";
 
             resultSet = statement.executeQuery(query);
         } catch (SQLException throwables) {
@@ -196,9 +171,10 @@ public boolean cancelDevis(int id) {
     public ResultSet getSalesSearchInfo(String text, String isLoan) {
         try {
 
-            String query = "SELECT `salesid`, `date`, `customercode`, `total_paye`, `recu`,"
-                    + "`changeMony`, `soldby` FROM "
-                    + "salesinfo where "
+            String query = "SELECT `salesid`, `date`, `customercode`, `total_paye`, `recu`, "
+                    + "`changeMony`, `soldby`, `productcode`, `quantity`,"
+                    + "   `detaild`  FROM "
+                    + "salledata where "
                     + " customercode LIKE '%" + text + "%' and isLoan= '" + isLoan + "' ORDER BY salesid";
 
             resultSet = statement.executeQuery(query);
@@ -243,9 +219,9 @@ public boolean cancelDevis(int id) {
         try {
 
             String query = "SELECT `salesid`, `date`, `customercode`, `total_paye`, `recu`, "
-                    + "`changeMony`, `soldby`"
+                    + "`changeMony`, `soldby`, `productcode`, `quantity`"
                     + "      FROM "
-                    + "salesdevis where "
+                    + "devisdata where "
                     + " customercode LIKE '%" + text + "%' and isLoan= '" + isLoan + "' ORDER BY salesid";
 
             resultSet = statement.executeQuery(query);
@@ -286,7 +262,7 @@ public boolean cancelDevis(int id) {
     public ResultSet getDateOfSalesSearchInfo(String start, String end, String isLoan) {
         try {
 
-            String query = "SELECT * FROM salesinfo where date BETWEEN '" + start + "' and '" + end + "' and isLoan= '" + isLoan + "'";
+            String query = "SELECT * FROM salledata where date BETWEEN '" + start + "' and '" + end + "' and isLoan= '" + isLoan + "'";
 
             resultSet = statement.executeQuery(query);
         } catch (SQLException throwables) {
@@ -324,7 +300,7 @@ public boolean cancelDevis(int id) {
     public ResultSet getDateOfSalesDevisSearchInfo(String start, String end, String isLoan) {
         try {
 
-            String query = "SELECT * FROM salesdevis where date BETWEEN '" + start + "' and '" + end + "' and isLoan= '" + isLoan + "'";
+            String query = "SELECT * FROM devisdata where date BETWEEN '" + start + "' and '" + end + "' and isLoan= '" + isLoan + "'";
 
             resultSet = statement.executeQuery(query);
         } catch (SQLException throwables) {

@@ -219,9 +219,8 @@ public class PayLoan extends javax.swing.JDialog {
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Somme Paye");
+        jLabel7.setText("Somme Recu");
 
-        txtSumPayDebit.setEditable(false);
         txtSumPayDebit.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         txtSumPayDebit.setForeground(new java.awt.Color(4, 0, 0));
         txtSumPayDebit.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -270,25 +269,22 @@ public class PayLoan extends javax.swing.JDialog {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator5, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSeparator6, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnPay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtSumPayDebit)
+                    .addComponent(btnDelAll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSeparator1)
+                    .addComponent(btnAll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSeparator4)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSeparator3)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 0, 0)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator6, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnPay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtSumPayDebit)
-                            .addComponent(btnDelAll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jSeparator1)
-                            .addComponent(btnAll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jSeparator4)
-                            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jSeparator3)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(btnEntrer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(20, 20, 20))
-                            .addComponent(txtNumbre)
-                            .addComponent(txtTotal, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnEntrer1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(btnEntrer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(20, 20, 20))
+                    .addComponent(txtNumbre)
+                    .addComponent(txtTotal, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnEntrer1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSeparator7, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
@@ -446,7 +442,7 @@ public class PayLoan extends javax.swing.JDialog {
 
     private void btnDelAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelAllActionPerformed
         DeleteAllDataPay();
-                    totalValue();
+        totalValue();
 
         // TODO add your handling code here:
     }//GEN-LAST:event_btnDelAllActionPerformed
@@ -482,7 +478,10 @@ public class PayLoan extends javax.swing.JDialog {
     private void btnPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayActionPerformed
         delteLoan();
         insertPayLoan();
+        txtSumPayDebit.requestFocus();
 
+        txtSumPayDebit.setSelectionStart(0);
+        txtSumPayDebit.setSelectionEnd(txtSumPayDebit.getText().length());
 // TODO add your handling code here:
     }//GEN-LAST:event_btnPayActionPerformed
 
@@ -523,9 +522,9 @@ public class PayLoan extends javax.swing.JDialog {
     }//GEN-LAST:event_btnEntrer1MouseEntered
 
     private void btnEntrer1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrer1ActionPerformed
-push1DataPay();    
-totalValue();
-    // TODO add your handling code here:
+        push1DataPay();
+        totalValue();
+        // TODO add your handling code here:
     }//GEN-LAST:event_btnEntrer1ActionPerformed
     private void loanTable() {
         DefaultTableModel listpays = (DefaultTableModel) payTable.getModel();
@@ -646,7 +645,8 @@ totalValue();
 
         }
     }
-void push1DataPay() {
+
+    void push1DataPay() {
         DefaultTableModel listpays = (DefaultTableModel) payTable.getModel();
         DefaultTableModel listLoans = (DefaultTableModel) loanTable.getModel();
 
@@ -713,15 +713,15 @@ void push1DataPay() {
 
     public void totalPaye() {
         try {
-            String query = "SELECT Sum((sellprice)-recu) as total  FROM salledata  "
-
-//            String query = "SELECT Sum((sellprice*quantity)-recu) as total  FROM salledata  "
-                    + "WHERE  customercode='" + codeText.getText() + "'  and  isLoan='true'";
+            String query = "SELECT (total_paye-recu) as total  FROM salesinfo  "
+                    //            String query = "SELECT Sum((sellprice*quantity)-recu) as total  FROM salledata  "
+                    + "WHERE  customercode='" + codeText.getText() + "'  and  salesid=" + data[0].toString();
 
             resultSet = statement.executeQuery(query);
             if (resultSet.next()) {
                 txtTotal.setText(resultSet.getString("total"));
 //                JOptionPane.showMessageDialog(null, "le client exists deja.");
+               
 
             } else {
 
@@ -735,8 +735,7 @@ void push1DataPay() {
     private void delteLoan() {
         if (payTable.getRowCount() != 0) {
 
-            for (int i = 0; i < payTable.getRowCount(); i++)
-            {
+            for (int i = 0; i < payTable.getRowCount(); i++) {
                 //this query will delete from saledetail table if the client pay his debit 
 
                 String query = "DELETE FROM sale_detail WHERE detaild  ='" + payTable.getValueAt(i, 3) + "'";
@@ -757,6 +756,17 @@ void push1DataPay() {
             } catch (SQLException ex) {
                 Logger.getLogger(PayLoan.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
+             try {
+                    String query3 = "UPDATE salesinfo SET recu=recu+" + txtSumPayDebit.getText() 
+                            + "WHERE  customercode='" + codeText.getText() + "'  and  salesid=" + data[0].toString();
+
+                    prepStatement = conn.prepareStatement(query3);
+
+                    prepStatement.executeUpdate();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
             totalPaye();
             clear();
         } else {
@@ -775,8 +785,7 @@ void push1DataPay() {
     }
 
     private void insertPayLoan() {
- 
- 
+
         try {
             String query2 = "INSERT INTO payloan VALUES(null,?,?,?,? )";
             prepStatement = conn.prepareStatement(query2);
@@ -815,11 +824,10 @@ void push1DataPay() {
     void totalValue() {
         DefaultTableModel listSalles = (DefaultTableModel) payTable.getModel();
         Double totalPaye = 0.0;
-       
+
         for (int i = 0; i < listSalles.getRowCount(); i++) {
             Double sellPrice = Double.parseDouble(listSalles.getValueAt(i, 4).toString());
-            Double totalRevenue = sellPrice;
-//                    * Integer.parseInt(listSalles.getValueAt(i, 2).toString());
+            Double totalRevenue = sellPrice ;//* Integer.parseInt(listSalles.getValueAt(i, 2).toString());
             totalPaye = totalPaye + totalRevenue;
             txtSumPayDebit.setText(totalPaye.toString());
 

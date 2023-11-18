@@ -1,1 +1,0 @@
-C:\\xampp\\mysql\\bin\\mysqldump.exe -u root -p root --database inventory2 -r   C:/deidine.sql

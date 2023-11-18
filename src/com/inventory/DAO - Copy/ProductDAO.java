@@ -502,9 +502,9 @@ public class ProductDAO {
 //                    + productDTO.getProdCode()
 //                    + "'";
 //            statement.executeUpdate(stockQuery);
-            String salesQuery = "INSERT INTO sale_devis_detail(salesid ,productcode,quantity ,sellprice)"
+            String salesQuery = "INSERT INTO sale_devis_detail(salesid ,productcode,quantity )"
                     + "VALUES('" + id + "','" + productDTO.getProdCode()
-                    + "','" + productDTO.getQuantity() + "','" + productDTO.getSellPrice()+ "'  )";
+                    + "','" + productDTO.getQuantity() + "'  )";
 
             statement.executeUpdate(salesQuery);
 //            JOptionPane.showMessageDialog(null, productDTO.getProdCode() + "produit est vender.");
@@ -541,9 +541,9 @@ public class ProductDAO {
                     + productDTO.getProdCode()
                     + "'";
             statement.executeUpdate(stockQuery);
-            String salesQuery = "INSERT INTO sale_detail(salesid ,productcode,quantity,sellPrice )"
+            String salesQuery = "INSERT INTO sale_detail(salesid ,productcode,quantity )"
                     + "VALUES('" + id + "','" + productDTO.getProdCode()
-                    + "','" + productDTO.getQuantity() +  "','" + productDTO.getSellPrice()+ "'  )";
+                    + "','" + productDTO.getQuantity() + "'  )";
 
             statement.executeUpdate(salesQuery);
 //            JOptionPane.showMessageDialog(null, productDTO.getProdCode() + "produit est vender.");
@@ -641,7 +641,7 @@ public class ProductDAO {
     // Search method for products
     public ResultSet getProductSearch2(String text) {
         try {
-            String query = "SELECT  `productcode`, `productname`, `brand`,"
+            String query = "SELECT  `productcode`, `productname`, `costprice`,`sellprice`, `brand`,"
                     + "  `quantity` FROM products "
                     + "WHERE productcode LIKE '%" + text + "%' OR productname LIKE '%" + text + "%' OR brand LIKE '%"
                     + text + "%'";

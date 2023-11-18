@@ -37,7 +37,7 @@ public class DevisTable extends DefaultTableModel {
 
     public String[] getColums() {
         String[] COLUMNS = {
-            "idVente", "Date", "Code_Client", "Total_payee", "recu", "retourner", "Vender_par", "Code_Produit", "Quentite"
+            "idVente", "Date", "Code_Client", "Total_payee", "recu", "retourner", "Vender_par"
         };
         return COLUMNS;
 
