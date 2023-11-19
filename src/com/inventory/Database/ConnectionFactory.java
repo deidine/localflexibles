@@ -47,7 +47,7 @@ public class ConnectionFactory {
 
         try {
             Class.forName(driver);
-            conn = DriverManager.getConnection(url, "root", "");
+            conn = DriverManager.getConnection(url, "deidine", "deidine");
             System.out.println("Connected successfully.");
             statement = conn.createStatement();
         } catch (Exception e) {
