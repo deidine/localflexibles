@@ -20,7 +20,7 @@ import java.util.Date;
 import java.util.Locale;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import com.inventory.Salles.PayLoan;
+import com.inventory.Salles.PayLoans;
 import com.inventory.tables.SalleTable2;
 import java.net.URISyntaxException;
 import java.text.ParseException;
@@ -372,7 +372,7 @@ public class InformationLoan extends javax.swing.JPanel {
                 data[i] = tabelInformation.getValueAt(row, i);
             }
             if (tabelInformation.getValueAt(row, 0) != null){
-                      new PayLoan(data);
+                      new PayLoans(data);
             }
       
 

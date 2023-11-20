@@ -1216,7 +1216,12 @@ public final class SallePage extends javax.swing.JFrame {
                         DefaultTableModel listSalles = (DefaultTableModel) salesTable.getModel();
 
                         try {
-                            devisProduct(true);
+                            if (TVA.isSelected()) {
+                                devisProduct(true, true);
+                            } else {
+                                devisProduct(true, false);
+                            }
+
                         } catch (URISyntaxException ex) {
                             Logger.getLogger(SallePage.class.getName()).log(Level.SEVERE, null, ex);
                         } catch (InterruptedException ex) {
@@ -2020,7 +2025,7 @@ public final class SallePage extends javax.swing.JFrame {
 
     }
 
-    public void devisProduct(boolean isLoan) throws URISyntaxException, InterruptedException {
+    public void devisProduct(boolean isLoan, boolean isTva) throws URISyntaxException, InterruptedException {
         DefaultTableModel listSalles = (DefaultTableModel) salesTable.getModel();
         if (listSalles.getRowCount() != 0) {
             ProductDTO productDTO = new ProductDTO();
@@ -2034,7 +2039,7 @@ public final class SallePage extends javax.swing.JFrame {
             productDTO.setTotalPayee(Double.parseDouble(txtTotal.getText()));
             productDTO.setTotalChange(Double.parseDouble(txtRendre.getText()));
 
-            new ProductDAO().sellDevisProductDAO(productDTO, this.username, isLoan);
+            new ProductDAO().sellDevisProductDAO(productDTO, this.username, isLoan, isTva);
             int id = new ProductDAO().idDevisSalle();
             productDTO2.setSalleID(id);
             productDTO.setSalleID(id);

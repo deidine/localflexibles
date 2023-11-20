@@ -86,7 +86,7 @@ public class ProductDAO {
 
     public ResultSet getSuppInfo() {
         try {
-            String query = "SELECT * FROM suppliers";
+            String query = "SELECT * FROM suppliers ORDER BY `suppliercode` DESC";
             resultSet = statement.executeQuery(query);
         } catch (Exception e) {
             e.printStackTrace();
@@ -96,7 +96,7 @@ public class ProductDAO {
 
     public ResultSet getCustInfo() {
         try {
-            String query = "SELECT * FROM customers";
+            String query = "SELECT * FROM customers ORDER BY `customercode` DESC";
             resultSet = statement.executeQuery(query);
         } catch (Exception e) {
             e.printStackTrace();
@@ -116,7 +116,7 @@ public class ProductDAO {
 
     public ResultSet getProdInfo() {
         try {
-            String query = "SELECT * FROM products";
+            String query = "SELECT * FROM products ORDER BY `productcode` DESC";
             resultSet = statement.executeQuery(query);
         } catch (Exception e) {
             e.printStackTrace();
@@ -127,7 +127,7 @@ public class ProductDAO {
     public Double getProdCost(String prodCode) {
         Double costPrice = null;
         try {
-            String query = "SELECT costprice FROM products WHERE productcode='" + prodCode + "'";
+            String query = "SELECT costprice FROM products WHERE productcode='" + prodCode + "' ORDER BY `productcode` DESC";
             resultSet = statement.executeQuery(query);
             if (resultSet.next()) {
                 costPrice = resultSet.getDouble("costprice");
@@ -141,7 +141,7 @@ public class ProductDAO {
     public Double getProdSell(String prodCode) {
         Double sellPrice = null;
         try {
-            String query = "SELECT sellprice FROM products WHERE productcode='" + prodCode + "'";
+            String query = "SELECT sellprice FROM products WHERE productcode='" + prodCode + "' ORDER BY `productcode` DESC";
             resultSet = statement.executeQuery(query);
             if (resultSet.next()) {
                 sellPrice = resultSet.getDouble("sellprice");
@@ -473,16 +473,16 @@ public class ProductDAO {
 
     }
 // Sales transaction handling
-    public void sellDevisProductDAO(ProductDTO productDTO, String username, boolean isLoan) {
+    public void sellDevisProductDAO(ProductDTO productDTO, String username, boolean isLoan, boolean isTva) {
         int quantity = 0;
         String prodCode = null;
         try {
 
-            String salesQuery = "INSERT INTO salesdevis(`salesid`, `date`, `customercode`, `total_paye`, `recu`, `changeMony`, `soldby`,`isLoan`)"
+            String salesQuery = "INSERT INTO salesdevis(`salesid`, `date`, `customercode`, `total_paye`, `recu`, `changeMony`, `soldby`,`isLoan`,`isTva`)"
                     + "VALUES(null,'" + productDTO.getDate() + "','"
                     + productDTO.getCustCode()
                     + "','" + productDTO.getTotalPayee() + "','"
-                    + productDTO.getTotalRcue() + "','" + productDTO.getTotalChange() + "','" + username + "','" + isLoan + "')";
+                    + productDTO.getTotalRcue() + "','" + productDTO.getTotalChange() + "','" + username + "','" + isLoan+ "','" + isTva + "')";
 
             statement.executeUpdate(salesQuery);
 //            JOptionPane.showMessageDialog(null, "le vende est terminer  pour le client." + productDTO.getCustCode() + " par le vendeur " + username + " bonjournee");

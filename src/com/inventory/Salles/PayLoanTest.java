@@ -26,7 +26,7 @@ import javax.swing.table.DefaultTableModel;
  */
 //this class is for when the client want to pay his debit it just give the mony and will have two table and button 
 //frist table show all his taken and the other will have the new payement so after that you have to delete from database
-public class PayLoan extends javax.swing.JDialog {
+public class PayLoanTest extends javax.swing.JDialog {
 
     Connection conn = null;
     PreparedStatement prepStatement = null;
@@ -35,9 +35,9 @@ public class PayLoan extends javax.swing.JDialog {
     private Object[] data;
 
     /**
-     * Creates new form PayLoan
+     * Creates new form PayLoanTest
      */
-    public PayLoan(Object[] data) {
+    public PayLoanTest(Object[] data) {
         try {
             conn = new ConnectionFactory().getConn();
             statement = conn.createStatement();
@@ -746,7 +746,7 @@ public class PayLoan extends javax.swing.JDialog {
                     statement.executeUpdate(query);
 
                 } catch (SQLException ex) {
-                    Logger.getLogger(PayLoan.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(PayLoanTest.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             String query2 = "DELETE FROM salesinfo WHERE salesid NOT IN(SELECT salesid FROM sale_detail) ";
@@ -754,7 +754,7 @@ public class PayLoan extends javax.swing.JDialog {
             try {
                 statement.executeUpdate(query2);
             } catch (SQLException ex) {
-                Logger.getLogger(PayLoan.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(PayLoanTest.class.getName()).log(Level.SEVERE, null, ex);
             }
             
              try {
@@ -796,7 +796,7 @@ public class PayLoan extends javax.swing.JDialog {
             prepStatement.setString(4, getCureentTime());
             prepStatement.executeUpdate();
         } catch (SQLException ex) {
-            Logger.getLogger(PayLoan.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PayLoanTest.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

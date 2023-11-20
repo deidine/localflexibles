@@ -66,6 +66,8 @@ public class PayDevis extends javax.swing.JDialog {
         this.username = username;
         this.data = data;
         initComponents();
+        isTva();
+
         loadDataSet();
         allDevisTable();
         totalValue();
@@ -196,8 +198,8 @@ public class PayDevis extends javax.swing.JDialog {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(jScrollPane2)
-                .addContainerGap())
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 654, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -274,6 +276,7 @@ public class PayDevis extends javax.swing.JDialog {
         TVA.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         TVA.setForeground(new java.awt.Color(255, 255, 255));
         TVA.setText("TVA");
+        TVA.setEnabled(false);
         TVA.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TVAActionPerformed(evt);
@@ -548,8 +551,6 @@ public class PayDevis extends javax.swing.JDialog {
         }
     }
 
-    
-    
     private void delteDevis() {
         if (allDevisTable.getRowCount() != 0) {
 
@@ -564,7 +565,7 @@ public class PayDevis extends javax.swing.JDialog {
                     statement.executeUpdate(query);
 
                 } catch (SQLException ex) {
-                    Logger.getLogger(PayLoan.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(PayDevis.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             String query2 = "DELETE FROM salesdevis WHERE salesid NOT IN(SELECT salesid FROM sale_devis_detail) ";
@@ -572,7 +573,7 @@ public class PayDevis extends javax.swing.JDialog {
             try {
                 statement.executeUpdate(query2);
             } catch (SQLException ex) {
-                Logger.getLogger(PayLoan.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(PayDevis.class.getName()).log(Level.SEVERE, null, ex);
             }
             totalValue();
             DefaultTableModel listSalles = (DefaultTableModel) allDevisTable.getModel();
@@ -616,6 +617,30 @@ public class PayDevis extends javax.swing.JDialog {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void isTva() {
+        String isTva = "false";
+        try {
+            String query = "select isTva FROM salesdevis WHERE salesid ='" + data[0].toString() + "'";
+            resultSet = statement.executeQuery(query);
+//            isTva = resultSet.next();
+            while (resultSet.next()) {
+                isTva = resultSet.getString("isTva");
+                if (isTva.equals("true")) {
+                    TVA.setSelected(true);
+                } else {
+                    TVA.setSelected(false);
+
+                }
+//
+                System.out.println(resultSet.getString("isTva") + "SS" + data[0].toString() + "ss" + isTva);
+//
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        System.out.println(data[0].toString() + "ss" + isTva);
     }
 
     public void selleOrloanProduct(boolean isLoan) throws URISyntaxException, InterruptedException {

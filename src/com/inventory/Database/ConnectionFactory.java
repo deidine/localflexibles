@@ -5,6 +5,7 @@
  */
 package com.inventory.Database;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
@@ -15,16 +16,25 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
+import org.apache.commons.io.FileUtils;
 
 /**
  *
  * @author asjad
  */
 //Class to retrieve connection for database and login verfication.
-public class ConnectionFactory {
+public final class ConnectionFactory {
+
+    public String readTxtFile(int number) throws IOException {
+        String line = null;
+        File file = new File("resources/info/databaseConnection.txt");
+
+        String line2 = FileUtils.readLines(file).get(number);
+         return line2;
+    }
 
     static final String driver = "com.mysql.cj.jdbc.Driver";
-    static final String url = "jdbc:mysql://localhost:3306/localflexible";
+//    static final String url = "jdbc:mysql://localhost:3306/"+readTxtFile(0);
     static String username;
     static String password;
 
@@ -47,8 +57,9 @@ public class ConnectionFactory {
 
         try {
             Class.forName(driver);
-            conn = DriverManager.getConnection(url, "deidine", "deidine");
-            System.out.println("Connected successfully.");
+            conn = DriverManager.getConnection("jdbc:mysql://" + readTxtFile(1) + ":" + readTxtFile(4) + "/" + readTxtFile(0),
+                    readTxtFile(2),
+                    readTxtFile(3));
             statement = conn.createStatement();
         } catch (Exception e) {
             e.printStackTrace();
@@ -58,28 +69,31 @@ public class ConnectionFactory {
     public Connection getConn() {
         try {
             Class.forName(driver);
-            conn = DriverManager.getConnection(url, "root", "");
+            conn = DriverManager.getConnection("jdbc:mysql://" + readTxtFile(1) + ":" + readTxtFile(4) + "/" + readTxtFile(0),
+                    readTxtFile(2),
+                    readTxtFile(3));
+
         } catch (Exception e) {
             e.printStackTrace();
         }
         return conn;
     }
 
-    public boolean checkConn()   {
+    public boolean checkConn() {
         getConn();
-
+            
         System.out.println("Server connected!");
         Statement stmt = null;
         ResultSet resultset = null;
 
         try {
-            
-            resultset =  statement.executeQuery("SHOW DATABASES;");
+
+            resultset = statement.executeQuery("SHOW DATABASES;");
             if (resultset.next()) {
                 System.out.println(resultset.getString("Database"));
                 return true;
             }
-           
+
         } catch (Exception ex) {
             // handle any errors
             ex.printStackTrace();
@@ -103,6 +117,8 @@ public class ConnectionFactory {
             if (resultSet.next()) {
                 return true;
             }
+            System.out.println("Connected successfully.");
+
         } catch (Exception ex) {
             ex.printStackTrace();
         }

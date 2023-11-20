@@ -19,6 +19,7 @@ import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -61,6 +62,7 @@ public class InformationTVA extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         bntPay = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
+        bntPay2 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollTabelTransaksi = new javax.swing.JScrollPane();
         tabelInformation = new javax.swing.JTable();
@@ -138,6 +140,16 @@ public class InformationTVA extends javax.swing.JPanel {
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
+        bntPay2.setBackground(new java.awt.Color(102, 255, 51));
+        bntPay2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        bntPay2.setForeground(new java.awt.Color(255, 255, 255));
+        bntPay2.setText("Afficher info Vente");
+        bntPay2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntPay2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelMainButtonLayout = new javax.swing.GroupLayout(panelMainButton);
         panelMainButton.setLayout(panelMainButtonLayout);
         panelMainButtonLayout.setHorizontalGroup(
@@ -157,22 +169,24 @@ public class InformationTVA extends javax.swing.JPanel {
                         .addComponent(jLabel5)
                         .addGap(0, 0, 0)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(panelMainButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(18, 18, 18)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addGroup(panelMainButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(bntPay, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
+                    .addComponent(bntPay2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelMainButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelMainButtonLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel4))
-                    .addGroup(panelMainButtonLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
-                        .addComponent(bntPay, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                         .addComponent(jTextSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(search)
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addGroup(panelMainButtonLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel4))))
             .addGroup(panelMainButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelMainButtonLayout.createSequentialGroup()
                     .addGap(49, 49, 49)
@@ -188,11 +202,17 @@ public class InformationTVA extends javax.swing.JPanel {
                         .addComponent(jLabel5))
                     .addGroup(panelMainButtonLayout.createSequentialGroup()
                         .addGroup(panelMainButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
                             .addGroup(panelMainButtonLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel1)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)))
+                                .addGroup(panelMainButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addGroup(panelMainButtonLayout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addComponent(jLabel1)))
+                                .addGap(0, 8, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMainButtonLayout.createSequentialGroup()
+                                .addGap(0, 6, Short.MAX_VALUE)
+                                .addComponent(bntPay2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(panelMainButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelMainButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(searchDate, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -312,6 +332,26 @@ String description="tva table";
             Logger.getLogger(InformationTVA.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_bntPayActionPerformed
+
+    private void bntPay2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntPay2ActionPerformed
+        if (tabelInformation.getSelectedRow() < 0  ) {
+            JOptionPane.showMessageDialog(this, "SLV slectionner un line dans le table pour le suprimer.");
+        } else {
+            int row = tabelInformation.getSelectedRow();
+            int col = tabelInformation.getColumnCount();
+            Object[] data = new Object[col];
+
+            for (int i = 0; i < col; i++) {
+
+                data[i] = tabelInformation.getValueAt(row, i);
+            }
+            if (tabelInformation.getValueAt(row, 0) != null){
+                new SalleInfo(data);
+            }
+
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bntPay2ActionPerformed
     private String getCureentTime() {
         
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -324,6 +364,7 @@ String description="tva table";
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntPay;
+    private javax.swing.JButton bntPay2;
     private com.toedter.calendar.JDateChooser endDate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

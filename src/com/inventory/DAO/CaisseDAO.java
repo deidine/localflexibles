@@ -5,7 +5,6 @@
 package com.inventory.DAO;
 
 import com.inventory.Database.ConnectionFactory;
-import com.inventory.Salles.PayLoan;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -41,7 +40,7 @@ public class CaisseDAO {
         try {
 
             String query = "SELECT `salesid`, `date`, `customercode`, `total_paye`, `recu`,"
-                    + "`changeMony`, `soldby`  FROM   salesinfo where isLoan='" + isloan + "' ";
+                    + "`changeMony`, `soldby`  FROM   salesinfo where isLoan='" + isloan + "' ORDER BY `salesid` DESC";
 
             resultSet = statement.executeQuery(query);
         } catch (SQLException throwables) {
@@ -54,7 +53,7 @@ public class CaisseDAO {
         try {
 
             String query = "Select `salesid`, `date`, `customercode`, `total_paye`, `recu`,"
-                    + " `changeMony`, `soldby` FROM  salesinfo ";
+                    + " `changeMony`, `soldby` FROM  salesinfo order by salesid DESC";
 
             resultSet = statement.executeQuery(query);
         } catch (SQLException throwables) {
@@ -66,7 +65,7 @@ public class CaisseDAO {
     public boolean cancelSalle(int id) {
         try {
 
-            String query = "Select * FROM  sale_detail where salesid  ='" + id + "'";
+            String query = "Select * FROM  sale_detail where salesid  ='" + id + "' ORDER BY `salesid` DESC";
 
             resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
@@ -91,7 +90,7 @@ public class CaisseDAO {
 public boolean cancelDevis(int id) {
         try {
 
-            String query = "Select * FROM  sale_devis_detail where salesid  ='" + id + "'";
+            String query = "Select * FROM  sale_devis_detail where salesid  ='" + id + "' ORDER BY `salesid` DESC";
 
             resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
@@ -99,7 +98,7 @@ public boolean cancelDevis(int id) {
                 updateQuent(resultSet.getInt("quantity"), resultSet.getString("productcode"));
             
             }
-            String query2 = "DELETE FROM salesdevis WHERE salesid  ='" + id + "'";
+            String query2 = "DELETE FROM salesdevis WHERE salesid  ='" + id + "' ORDER BY `salesid` DESC";
 
             try {
                 statement.executeUpdate(query2);
@@ -130,7 +129,7 @@ public boolean cancelDevis(int id) {
     public ResultSet getSalesTVAInfo(String isTva) {
         try {
 
-            String query = "SELECT * FROM   salesinfo where isTva='" + isTva + "' ";
+            String query = "SELECT * FROM   salesinfo where isTva='" + isTva + "' ORDER BY `salesid` DESC";
 
             resultSet = statement.executeQuery(query);
         } catch (SQLException throwables) {
@@ -143,7 +142,7 @@ public boolean cancelDevis(int id) {
         try {
 
             String query = "SELECT `salesid`, `date`, `customercode`, `total_paye`, `recu`,"
-                    + "`changeMony`, `soldby`   FROM   salesdevis where isLoan='" + isloan + "' ";
+                    + "`changeMony`, `soldby`   FROM   salesdevis where isLoan='" + isloan + "' ORDER BY `salesid` DESC";
 
             resultSet = statement.executeQuery(query);
         } catch (SQLException throwables) {
@@ -155,7 +154,7 @@ public boolean cancelDevis(int id) {
     public ResultSet getCaisseInfo() {
         try {
 
-            String query = "SELECT * FROM   caisse   ";
+            String query = "SELECT * FROM   caisse   ORDER BY `caisseid` DESC";
 
             resultSet = statement.executeQuery(query);
         } catch (SQLException throwables) {
@@ -167,7 +166,7 @@ public boolean cancelDevis(int id) {
     public ResultSet getCaisseLoanInfo() {
         try {
 
-            String query = "SELECT * FROM   payloan ";
+            String query = "SELECT * FROM   payloan ORDER BY `id` DESC";
 
             resultSet = statement.executeQuery(query);
         } catch (SQLException throwables) {
@@ -184,7 +183,7 @@ public boolean cancelDevis(int id) {
                     + "   `detaild` FROM loandata where "
                     + "productcode LIKE '%" + text + "%'   "
                     + " OR soldby  LIKE '%" + text + "%' OR customercode LIKE '%" + text
-                    + "%' ORDER BY loansid";
+                    + "%' ORDER BY loansid DESC";
 
             resultSet = statement.executeQuery(query);
         } catch (SQLException throwables) {
@@ -199,7 +198,7 @@ public boolean cancelDevis(int id) {
             String query = "SELECT `salesid`, `date`, `customercode`, `total_paye`, `recu`,"
                     + "`changeMony`, `soldby` FROM "
                     + "salesinfo where "
-                    + " customercode LIKE '%" + text + "%' and isLoan= '" + isLoan + "' ORDER BY salesid";
+                    + " customercode LIKE '%" + text + "%' and isLoan= '" + isLoan + "' ORDER BY salesid DESC";
 
             resultSet = statement.executeQuery(query);
         } catch (SQLException throwables) {
@@ -215,7 +214,7 @@ public boolean cancelDevis(int id) {
                     + "`changeMony`, `soldby`"
                     + "FROM "
                     + "salesinfo where "
-                    + " customercode LIKE '%" + text + "%'  ORDER BY salesid";
+                    + " customercode LIKE '%" + text + "%'  ORDER BY salesid DESC";
 
             resultSet = statement.executeQuery(query);
         } catch (SQLException throwables) {
@@ -230,7 +229,7 @@ public boolean cancelDevis(int id) {
             String query = "SELECT * FROM "
                     + "salesinfo where "
                     + " customercode LIKE '%" + text + "%' "
-                    + "and isTva= '" + isTva + "' ORDER BY salesid";
+                    + "and isTva= '" + isTva + "' ORDER BY salesid DESC";
 
             resultSet = statement.executeQuery(query);
         } catch (SQLException throwables) {
@@ -246,7 +245,7 @@ public boolean cancelDevis(int id) {
                     + "`changeMony`, `soldby`"
                     + "      FROM "
                     + "salesdevis where "
-                    + " customercode LIKE '%" + text + "%' and isLoan= '" + isLoan + "' ORDER BY salesid";
+                    + " customercode LIKE '%" + text + "%' and isLoan= '" + isLoan + "' ORDER BY salesid DESC";
 
             resultSet = statement.executeQuery(query);
         } catch (SQLException throwables) {
@@ -260,7 +259,7 @@ public boolean cancelDevis(int id) {
 
             String query = "SELECT * FROM "
                     + "caisse where "
-                    + " soldby LIKE '%" + text + "%'   ORDER BY salesid";
+                    + " soldby LIKE '%" + text + "%'   ORDER BY salesid DESC";
 
             resultSet = statement.executeQuery(query);
         } catch (SQLException throwables) {
@@ -274,7 +273,7 @@ public boolean cancelDevis(int id) {
 
             String query = "SELECT * FROM "
                     + "payloan where "
-                    + " soldby LIKE '%" + text + "%' or customercode  LIKE '%" + text + "%'   ORDER BY  id";
+                    + " soldby LIKE '%" + text + "%' or customercode  LIKE '%" + text + "%'   ORDER BY  id DESC";
 
             resultSet = statement.executeQuery(query);
         } catch (SQLException throwables) {
@@ -286,7 +285,7 @@ public boolean cancelDevis(int id) {
     public ResultSet getDateOfSalesSearchInfo(String start, String end, String isLoan) {
         try {
 
-            String query = "SELECT * FROM salesinfo where date BETWEEN '" + start + "' and '" + end + "' and isLoan= '" + isLoan + "'";
+            String query = "SELECT * FROM salesinfo where date BETWEEN '" + start + "' and '" + end + "' and isLoan= '" + isLoan + "' ORDER BY `salesid` DESC";
 
             resultSet = statement.executeQuery(query);
         } catch (SQLException throwables) {
@@ -300,7 +299,7 @@ public boolean cancelDevis(int id) {
 
             String query = "SELECT `salesid`, `date`, `customercode`, `total_paye`, "
                     + "`recu`, `changeMony`, `soldby` FROM salesinfo where"
-                    + " date BETWEEN '" + start + "' and '" + end + "' ";
+                    + " date BETWEEN '" + start + "' and '" + end + "' ORDER BY `salesid` DESC";
 
             resultSet = statement.executeQuery(query);
         } catch (SQLException throwables) {
@@ -312,7 +311,7 @@ public boolean cancelDevis(int id) {
     public ResultSet getDateOfSalesTvaSearchInfo(String start, String end, String isTva) {
         try {
 
-            String query = "SELECT * FROM salesinfo where date BETWEEN '" + start + "' and '" + end + "' and isTva= '" + isTva + "'";
+            String query = "SELECT * FROM salesinfo where date BETWEEN '" + start + "' and '" + end + "' and isTva= '" + isTva + "' ORDER BY `salesid` DESC";
 
             resultSet = statement.executeQuery(query);
         } catch (SQLException throwables) {
@@ -324,7 +323,7 @@ public boolean cancelDevis(int id) {
     public ResultSet getDateOfSalesDevisSearchInfo(String start, String end, String isLoan) {
         try {
 
-            String query = "SELECT * FROM salesdevis where date BETWEEN '" + start + "' and '" + end + "' and isLoan= '" + isLoan + "'";
+            String query = "SELECT * FROM salesdevis where date BETWEEN '" + start + "' and '" + end + "' and isLoan= '" + isLoan + "' ORDER BY `salesid` DESC";
 
             resultSet = statement.executeQuery(query);
         } catch (SQLException throwables) {
@@ -336,7 +335,7 @@ public boolean cancelDevis(int id) {
     public ResultSet getDateOfCaisseSearchInfo(String start, String end) {
         try {
 
-            String query = "SELECT * FROM caisse where date BETWEEN '" + start + "' and '" + end + "'";
+            String query = "SELECT * FROM caisse where date BETWEEN '" + start + "' and '" + end + "' ORDER BY `caisseid` DESC";
 
             resultSet = statement.executeQuery(query);
         } catch (SQLException throwables) {
@@ -348,7 +347,7 @@ public boolean cancelDevis(int id) {
     public ResultSet getDateOfCaisseLoanSearchInfo(String start, String end) {
         try {
 
-            String query = "SELECT * FROM payloan where date BETWEEN '" + start + "' and '" + end + "'";
+            String query = "SELECT * FROM payloan where date BETWEEN '" + start + "' and '" + end + "' ORDER BY `id` DESC";
 
             resultSet = statement.executeQuery(query);
         } catch (SQLException throwables) {
