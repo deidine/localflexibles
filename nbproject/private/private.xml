@@ -3,8 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Republic%20Of%20Computer/Documents/NetBeansProjects/deidine/src/com/inventory/UI/Dashboard.java</file>
-            <file>file:/C:/Users/Republic%20Of%20Computer/Documents/NetBeansProjects/deidine/src/deidine/Deidine.java</file>
+            <file>file:/C:/Users/Republic%20Of%20Computer/Documents/NetBeansProjects/deidine/src/com/inventory/tables/CaisseLoanTable.java</file>
+            <file>file:/C:/Users/Republic%20Of%20Computer/Documents/NetBeansProjects/deidine/src/com/inventory/tables/SalleTable.java</file>
+            <file>file:/C:/Users/Republic%20Of%20Computer/Documents/NetBeansProjects/deidine/src/com/inventory/DAO/ProductDAO.java</file>
+            <file>file:/C:/Users/Republic%20Of%20Computer/Documents/NetBeansProjects/deidine/src/com/inventory/DAO/CaisseDAO.java</file>
+            <file>file:/C:/Users/Republic%20Of%20Computer/Documents/NetBeansProjects/deidine/src/com/inventory/DAO/SupplierDAO.java</file>
+            <file>file:/C:/Users/Republic%20Of%20Computer/Documents/NetBeansProjects/deidine/src/com/inventory/Salles/DashboardSalle.java</file>
+            <file>file:/C:/Users/Republic%20Of%20Computer/Documents/NetBeansProjects/deidine/src/com/inventory/raport/PdfSalle.java</file>
+            <file>file:/C:/Users/Republic%20Of%20Computer/Documents/NetBeansProjects/deidine/src/com/inventory/Salles/PayDevis.java</file>
+            <file>file:/C:/Users/Republic%20Of%20Computer/Documents/NetBeansProjects/deidine/src/com/inventory/tables/CaisseTable.java</file>
+            <file>file:/C:/Users/Republic%20Of%20Computer/Documents/NetBeansProjects/deidine/src/com/inventory/Salles/InformationLoan.java</file>
+            <file>file:/C:/Users/Republic%20Of%20Computer/Documents/NetBeansProjects/deidine/src/com/inventory/Database/ConnectionFactory.java</file>
+            <file>file:/C:/Users/Republic%20Of%20Computer/Documents/NetBeansProjects/deidine/src/com/inventory/Salles/InformationSale.java</file>
+            <file>file:/C:/Users/Republic%20Of%20Computer/Documents/NetBeansProjects/deidine/src/com/inventory/Salles/Utils.java</file>
         </group>
     </open-files>
 </project-private>

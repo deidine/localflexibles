@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 18, 2023 at 03:15 PM
+-- Generation Time: Nov 20, 2023 at 11:54 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -102,7 +102,8 @@ CREATE TABLE `customers` (
 -- Dumping data for table `customers`
 --
 
-INSERT INTO `customers` (`customercode`, `fullname`, `location`, `phone`) VALUES 
+INSERT INTO `customers` (`customercode`, `fullname`, `location`, `phone`) VALUES
+ 
 ('inconue', 'inconue', 'inconue', '123456789');
 
 -- --------------------------------------------------------
@@ -140,6 +141,10 @@ CREATE TABLE `payloan` (
   `date` varchar(22) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `payloan`
+--
+
 -- --------------------------------------------------------
 
 --
@@ -159,7 +164,6 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
  
-
 -- --------------------------------------------------------
 
 --
@@ -204,12 +208,14 @@ CREATE TABLE `salesdevis` (
   `recu` double NOT NULL,
   `changeMony` double NOT NULL,
   `soldby` varchar(45) NOT NULL,
-  `isLoan` varchar(22) NOT NULL
+  `isLoan` varchar(22) NOT NULL,
+  `isTva` varchar(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `salesdevis`
--- 
+--
+ 
 -- --------------------------------------------------------
 
 --
@@ -231,6 +237,7 @@ CREATE TABLE `salesinfo` (
 --
 -- Dumping data for table `salesinfo`
 --
+
  
 -- --------------------------------------------------------
 
@@ -246,8 +253,10 @@ CREATE TABLE `sale_detail` (
   `sellPrice` int(33) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
+--
+-- Dumping data for table `sale_detail`
+--
+ 
 --
 -- Table structure for table `sale_devis_detail`
 --
@@ -263,28 +272,6 @@ CREATE TABLE `sale_devis_detail` (
 --
 -- Dumping data for table `sale_devis_detail`
 --
- 
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `salledata`
--- (See below for the actual view)
---
-CREATE TABLE `salledata` (
-`salesid` int(11)
-,`date` varchar(45)
-,`customercode` varchar(45)
-,`total_paye` double
-,`recu` double
-,`changeMony` double
-,`soldby` varchar(45)
-,`productcode` varchar(45)
-,`quantity` int(11)
-,`isLoan` varchar(22)
-,`detaild` int(11)
-,`sellprice` int(33)
-);
-
 -- --------------------------------------------------------
 
 --
@@ -477,7 +464,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `caisse`
 --
 ALTER TABLE `caisse`
-  MODIFY `caisseid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `caisseid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `categorie`
@@ -489,7 +476,7 @@ ALTER TABLE `categorie`
 -- AUTO_INCREMENT for table `payloan`
 --
 ALTER TABLE `payloan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `purchaseinfo`
@@ -501,25 +488,25 @@ ALTER TABLE `purchaseinfo`
 -- AUTO_INCREMENT for table `salesdevis`
 --
 ALTER TABLE `salesdevis`
-  MODIFY `salesid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `salesid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `salesinfo`
 --
 ALTER TABLE `salesinfo`
-  MODIFY `salesid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=325;
+  MODIFY `salesid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=339;
 
 --
 -- AUTO_INCREMENT for table `sale_detail`
 --
 ALTER TABLE `sale_detail`
-  MODIFY `detaild` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `detaild` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `sale_devis_detail`
 --
 ALTER TABLE `sale_devis_detail`
-  MODIFY `detaild` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+  MODIFY `detaild` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
 
 --
 -- AUTO_INCREMENT for table `users`
